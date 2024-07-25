@@ -1,0 +1,20 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.eachItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 400px;
+  height: 400px;
+  box-shadow: 0 2px 20px 0 rgba(#00131A, 0.1);
+  flex: 1;
+}

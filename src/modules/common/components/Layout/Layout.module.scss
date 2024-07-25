@@ -1,14 +1,30 @@
 @import '@modules/common/styles/media';
 
-.content {
-  padding-top: 110px;
+.headerContainer {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  top: 0;
+  z-index: 21;
+  height: 70px;
+  width: 100%;
+  background-color: var(--grey-30);
+  box-shadow: 0 2px 20px 0 rgba(#00131A, 0.1);
+}
+.headerContentWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  height: 100%;
+  background-color: white;
 }
 
-@include media("<tabletMaxSize") {
-  .content {
-    padding-top: 70px;
-  }
+
+.content {
+  padding-top: 70px;
 }
+
 
 .centralize {
   display: flex;

@@ -1,0 +1,6 @@
+@import '@modules/common/styles/mixins';
+
+.container {
+  @include pageContent();
+  flex-direction: column;
+}

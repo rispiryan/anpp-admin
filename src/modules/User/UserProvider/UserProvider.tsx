@@ -75,6 +75,11 @@ const UserProvider: FC<PropsWithChildren> = ({ children }) => {
   // This state is when request is done but User data is not set
   const responsesFulfilled = token && !user;
 
+  console.log(
+    "isFetching || isInitialState || responsesFulfilled",
+    !!(isFetching || isInitialState || responsesFulfilled),
+  );
+
   return (
     <UserContext.Provider value={{ isAuthenticated: !!(token || tokenFromLocalStorage), logout, login, user }}>
       {isFetching || isInitialState || responsesFulfilled ? <Loader isLoading /> : <>{children}</>}

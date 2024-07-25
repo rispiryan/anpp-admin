@@ -19,12 +19,15 @@ const PrivateRoute: FC<PropsWithChildren<IProps>> = ({
   const { isAuthenticated } = useUser();
 
   useEffect(() => {
+    // TODO remove decoment code
     if (!isAuthenticated) {
-      navigate(accessDeniedUrl);
+      // navigate(accessDeniedUrl);
     }
   }, [navigate, accessDeniedUrl, isAuthenticated]);
 
-  return <>{isAuthenticated && children}</>;
+  // TODO remove decoment code
+  // return <>{isAuthenticated && children}</>;
+  return <>{!isAuthenticated && children}</>;
 };
 
 export default PrivateRoute;
