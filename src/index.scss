@@ -1,0 +1,143 @@
+@import "@modules/common/styles/mixins";
+
+:root {
+    --toastify-z-index: 10;
+    @include customScrollBar('&')
+}
+
+ul li {
+    outline: none !important;
+}
+
+body.menu_opened {
+    overflow: hidden;
+}
+.ios_device.menu_opened {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+.fl {
+    float: left;
+}
+.fr {
+    float: right;
+}
+.cb {
+    clear: both;
+    display: block;
+}
+input,
+select,
+textarea,
+button,
+a {
+    outline: none !important;
+    box-shadow: none !important;
+}
+a,
+a:focus,
+a:hover,
+button:hover {
+    text-decoration: none;
+}
+button {
+    cursor: pointer;
+    display: block;
+}
+img {
+    max-height: none;
+    border: none;
+}
+
+@font-face {
+    font-family: primary;
+    src: url('./assets/fonts/noto-sans-arm/NotoSansArmenian-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: primary-light;
+    src: url('./assets/fonts/noto-sans-arm/NotoSansArmenian-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: primary-medium;
+    src: url('./assets/fonts/noto-sans-arm/NotoSansArmenian-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: primary-semibold;
+    src: url('./assets/fonts/noto-sans-arm/NotoSansArmenian-SemiBold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: primary-bold;
+    src: url('./assets/fonts/noto-sans-arm/NotoSansArmenian-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: secondary;
+    src: url('./assets/fonts/noto-sans/NotoSans-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: secondary-light;
+    src: url('./assets/fonts/noto-sans/NotoSans-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: secondary-medium;
+    src: url('./assets/fonts/noto-sans/NotoSans-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: secondary-semibold;
+    src: url('./assets/fonts/noto-sans/NotoSans-SemiBold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: secondary-bold;
+    src: url('./assets/fonts/noto-sans/NotoSans-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+.font {
+    font-family: primary, secondary !important;
+
+    &--light {
+        font-family: primary-light, secondary-light !important;
+    }
+    &--medium {
+        font-family: primary-medium, secondary-medium !important;
+    }
+    &--semibold {
+        font-family: primary-semibold, secondary-semibold !important;
+    }
+    &--bold {
+        font-family: primary-bold, secondary-bold !important;
+    }
+}
+
+
+

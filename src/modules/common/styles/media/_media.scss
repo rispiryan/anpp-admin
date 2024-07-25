@@ -1,0 +1,10 @@
+@import 'include-media/dist/include-media';
+$breakpoints: (
+  'tabletMaxSize': 1200px,
+  'tabletMinSize': 768px
+);
+
+/* ===== Usage ===== */
+// @include media(">tabletMinSize", "<=900px") {
+//   background-color: #bad;
+//   }

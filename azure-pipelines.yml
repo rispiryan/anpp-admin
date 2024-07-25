@@ -1,0 +1,196 @@
+# Node.js with React 
+# Build a Node.js project that uses React.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+variables:
+  - group: Autoloan
+
+trigger:
+  branches:
+    include:
+    - refs/heads/release/*
+    - refs/heads/develop
+    - refs/heads/master
+
+stages:
+- stage: DEV
+  displayName: Build for Dev
+  dependsOn: []
+  condition: eq( variables['Build.SourceBranch'], 'refs/heads/develop') 
+  jobs:
+    - job: BuildForDev
+      displayName: Build and Publich for Dev
+      pool: 
+        vmImage: windows-2022
+      steps:
+        - task: NodeTool@0
+          inputs:
+            versionSpec: '20.x'
+          displayName: 'Install Node.js'
+
+        - script: |
+            npm install -g pnpm
+          displayName: 'Install pnpm'
+
+        - script: |
+            pnpm install --frozen-lockfile
+          displayName: 'Install pnpm dependencies'
+
+
+        - task: Npm@1
+          displayName: 'npm build for develop'
+          inputs:
+            command: custom
+            verbose: true
+            customCommand: 'run build'
+          env:
+            REACT_APP_LOCAL_SERVER_URL: $(REACT_APP_LOCAL_SERVER_URL_DEV)
+            REACT_APP_LOCAL_SOURCE_URL: $(REACT_APP_LOCAL_SOURCE_URL_DEV)
+
+        - task: ArchiveFiles@2
+          inputs:
+            rootFolderOrFile: build
+            includeRootFolder: false
+            archiveType: 'zip'
+            archiveFile: '$(Build.ArtifactStagingDirectory)/AutoloanFE.zip'
+            replaceExistingArchive: true
+
+        - task: PublishBuildArtifacts@1
+          displayName: 'Publish Artifact: dev'
+          inputs:
+            PathtoPublish: $(Build.ArtifactStagingDirectory)
+            ArtifactName: dev
+  
+
+
+- stage: TEST
+  displayName: Build for Test
+  dependsOn: []
+  condition: contains( variables['Build.SourceBranch'], 'refs/heads/release') 
+  jobs:
+    - job: BuildForTest
+      displayName: Build and Publich for Test
+      pool: 
+        vmImage: windows-2019
+      steps:
+        - task: NodeTool@0
+          inputs:
+            versionSpec: '20.x'
+          displayName: 'Install Node.js'
+
+        - script: |
+            npm install -g pnpm
+          displayName: 'Install pnpm'
+
+        - script: |
+            pnpm install --frozen-lockfile
+          displayName: 'Install pnpm dependencies'
+
+        - task: Npm@1
+          displayName: 'npm build for test'
+          inputs:
+            command: custom
+            verbose: true
+            customCommand: 'run build'
+          env:
+            REACT_APP_LOCAL_SERVER_URL: $(REACT_APP_LOCAL_SERVER_URL_TEST)
+            REACT_APP_LOCAL_SOURCE_URL: $(REACT_APP_LOCAL_SOURCE_URL_TEST)
+        - task: ArchiveFiles@2
+          inputs:
+            rootFolderOrFile: build
+            includeRootFolder: false
+            archiveType: 'zip'
+            archiveFile: '$(Build.ArtifactStagingDirectory)/AutoloanFE.zip'
+            replaceExistingArchive: true
+        - task: SonarCloudPrepare@1
+          inputs:
+            SonarCloud: 'SonarCloud_sonarbot'
+            organization: 'ameriabank'
+            scannerMode: 'CLI'
+            configMode: 'manual'
+            cliProjectKey: 'ameriabank_automarket'
+            cliProjectName: 'AutoMarket'
+            cliSources: '.'
+        - task: SonarCloudAnalyze@1
+          inputs:
+            jdkversion: 'JAVA_HOME_17_X64'
+        - task: SonarCloudPublish@1
+          inputs:
+            pollingTimeoutSec: '300'
+        - task: PublishBuildArtifacts@1
+          displayName: 'Publish Artifact: test'
+          inputs:
+            PathtoPublish: $(Build.ArtifactStagingDirectory)
+            ArtifactName: test
+
+- stage: MASTER
+  displayName: Build for Stage and Prod
+  dependsOn: []
+  condition: eq( variables['Build.SourceBranch'], 'refs/heads/master') 
+  jobs:
+    - job: BuildForStageAndProd
+      displayName: Build and Publich for Stage and Prod
+      pool: 
+        vmImage: windows-2019
+      steps:
+        - task: NodeTool@0
+          inputs:
+            versionSpec: '20.x'
+          displayName: 'Install Node.js'
+
+        - script: |
+            npm install -g pnpm
+          displayName: 'Install pnpm'
+
+        - script: |
+            pnpm install --frozen-lockfile
+          displayName: 'Install pnpm dependencies'
+
+        - task: Npm@1
+          displayName: 'npm build for production'
+          inputs:
+            command: custom
+            verbose: true
+            customCommand: 'run build'
+          env:
+            REACT_APP_LOCAL_SERVER_URL: $(REACT_APP_LOCAL_SERVER_URL_PROD)
+            REACT_APP_LOCAL_SOURCE_URL: $(REACT_APP_LOCAL_SOURCE_URL_PROD)
+
+        - task: ArchiveFiles@2
+          inputs:
+            rootFolderOrFile: build
+            includeRootFolder: false
+            archiveType: 'zip'
+            archiveFile: '$(Build.ArtifactStagingDirectory)/AutoloanFE.zip'
+            replaceExistingArchive: true
+
+        - task: PublishBuildArtifacts@1
+          displayName: 'Publish Artifact: prd'
+          inputs:
+            PathtoPublish: $(Build.ArtifactStagingDirectory)
+            ArtifactName: prd
+
+        - task: Npm@1
+          displayName: 'npm build for stage'
+          inputs:
+            command: custom
+            verbose: true
+            customCommand: 'run build'
+          env:
+            REACT_APP_LOCAL_SERVER_URL: $(REACT_APP_LOCAL_SERVER_URL_STAGE)
+            REACT_APP_LOCAL_SOURCE_URL: $(REACT_APP_LOCAL_SOURCE_URL_STAGE)
+
+        - task: ArchiveFiles@2
+          inputs:
+            rootFolderOrFile: build
+            includeRootFolder: false
+            archiveType: 'zip'
+            archiveFile: '$(Build.ArtifactStagingDirectory)/AutoloanFE.zip'
+            replaceExistingArchive: true
+
+        - task: PublishBuildArtifacts@1
+          displayName: 'Publish Artifact: stg'
+          inputs:
+            PathtoPublish: $(Build.ArtifactStagingDirectory)
+            ArtifactName: stg

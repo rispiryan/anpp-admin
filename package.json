@@ -1,0 +1,81 @@
+{
+	"name": "annp-admin",
+	"version": "0.1.0",
+	"private": true,
+	"type": "module",
+	"dependencies": {
+		"@hookform/resolvers": "^3.3.1",
+		"@tanstack/react-query": "^5.40.1",
+		"@vitejs/plugin-react": "^4.2.1",
+		"axios": "^1.6.7",
+		"classnames": "^2.5.1",
+		"node": "^20.11.17",
+		"postcss-scss": "^4.0.8",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0",
+		"react-hook-form": "^7.48.2",
+		"react-responsive": "^9.0.2",
+		"react-router-dom": "6.18.0",
+		"vite": "^5.1.2",
+		"vite-plugin-checker": "^0.6.4",
+		"vite-plugin-svgr": "^4.2.0",
+		"vite-tsconfig-paths": "^4.3.2",
+		"yup": "^1.2.0"
+	},
+	"scripts": {
+		"start": "vite",
+		"build": "vite build",
+		"postbuild": "npm run delete-source-maps",
+		"delete-source-maps": "rm -rf ./build/assets/*.js.map",
+		"lint": "eslint ./src --ext .ts,.tsx",
+		"lint:fix": "eslint ./src --ext .ts,.tsx --fix",
+		"clean": "rm -rf ./node_modules node_modules"
+	},
+	"browserslist": [
+		">0.2%",
+		"not dead",
+		"not ie <= 9",
+		"not op_mini all"
+	],
+	"devDependencies": {
+		"@commitlint/cli": "^17.7.1",
+		"@commitlint/config-conventional": "^17.7.0",
+		"@commitlint/prompt-cli": "^17.7.1",
+		"@total-typescript/ts-reset": "^0.5.1",
+		"@types/node": "^20.11.17",
+		"@types/react": "^18.2.21",
+		"@types/react-dom": "^18.2.7",
+		"@typescript-eslint/eslint-plugin": "^7.6.0",
+		"@typescript-eslint/parser": "^7.6.0",
+		"eslint": "^8.57.0",
+		"eslint-config-prettier": "^9.1.0",
+		"eslint-import-resolver-typescript": "^3.6.1",
+		"eslint-plugin-import": "^2.29.1",
+		"eslint-plugin-jsx-a11y": "^6.8.0",
+		"eslint-plugin-perfectionist": "^2.8.0",
+		"eslint-plugin-prettier": "^5.1.3",
+		"eslint-plugin-react": "^7.34.1",
+		"eslint-plugin-react-hooks": "^4.6.0",
+		"eslint-plugin-unused-imports": "^3.1.0",
+		"husky": "^9.0.10",
+		"include-media": "1.4.10",
+		"lint-staged": "^15.2.2",
+		"nx": "^16.8.1",
+		"prettier": "^3.2.5",
+		"sass": "^1.67.0",
+		"typescript": "^5.2.2",
+		"vite": "^5.1.2",
+		"vite-plugin-svgr": "^4.1.0"
+	},
+	"lint-staged": {
+		"*.{js,ts,tsx}": "eslint . -c ./.eslintrc.cjs"
+	},
+	"engines": {
+		"node": ">=18"
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged"
+		}
+	}
+}

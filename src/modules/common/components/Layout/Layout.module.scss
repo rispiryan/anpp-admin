@@ -1,0 +1,34 @@
+@import '@modules/common/styles/media';
+
+.content {
+  padding-top: 110px;
+}
+
+@include media("<tabletMaxSize") {
+  .content {
+    padding-top: 70px;
+  }
+}
+
+.centralize {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  flex: 1;
+}
+
+.test {
+  position: fixed;
+  color: red;
+  font-size: 32px;
+  font-weight: 600;
+  top: 110px;
+  right: 0;
+  z-index: 21;
+}
+
+@include media("<tabletMaxSize") {
+  .test {
+    top: 70px;
+  }
+}

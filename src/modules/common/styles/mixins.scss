@@ -1,0 +1,54 @@
+@import '@modules/common/styles/media';
+
+@mixin customScrollBar($class-name) {
+  #{$class-name} {
+    overflow-y: overlay;
+  }
+  /* total width */
+  #{$class-name}::-webkit-scrollbar {
+    background-color: rgba(0, 0, 0, 0);
+    width: 8px;
+  }
+
+  /* background of the scrollbar except button or resizer */
+  #{$class-name}::-webkit-scrollbar-track {
+    background-color: rgba(0, 0, 0, 0);
+  }
+
+  /* scrollbar itself */
+  #{$class-name}::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 16px;
+    border: 0px solid #fff;
+  }
+
+  /* set button(top and bottom of the scrollbar) */
+  #{$class-name}::-webkit-scrollbar-button {
+    display: none;
+  }
+
+
+  /* scrollbar when element is hovered */
+  #{$class-name}:hover::-webkit-scrollbar-thumb {
+    background-color: #a0a0a5;
+    border: 1px solid #fff;
+  }
+
+  /* scrollbar when scrollbar is hovered */
+  #{$class-name}::-webkit-scrollbar-thumb:hover {
+    background-color: #a0a0a5;
+    border: 1px solid #f4f4f4
+  }
+}
+
+@mixin pageContent() {
+  padding: 34px 32px;
+  max-width: 1480px;
+  flex: 1;
+  display: flex;
+  width: 100%;
+
+  @include media("<tabletMinSize") {
+    padding: 34px 16px;
+  }
+}
