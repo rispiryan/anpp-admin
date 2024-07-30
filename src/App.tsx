@@ -1,8 +1,12 @@
 import { ReactQueryProvider } from "@modules/common/components/ReactQueryProvider/ReactQueryProvider";
 import { BrowserRouter, Navigate, Routes, Route } from "react-router-dom";
+import EachLearnItem from "@modules/LearnItems/components/EachLearnItem";
+import EachPartner from "@modules/Partners/components/EachPartner";
 import EachNews from "@modules/News/components/EachNews";
 import Layout from "@modules/common/components/Layout";
 import UserProvider from "@modules/User/UserProvider";
+import LearnItems from "@modules/LearnItems";
+import Partners from "@modules/Partners";
 import { Login } from "@modules/User";
 import News from "@modules/News";
 
@@ -21,6 +25,14 @@ export function App() {
               <Route path={APP_PATHS.news}>
                 <Route element={<News />} index />
                 <Route element={<EachNews />} path=":id" />
+              </Route>
+              <Route path={APP_PATHS.partners}>
+                <Route element={<Partners />} index />
+                <Route element={<EachPartner />} path=":id" />
+              </Route>
+              <Route path={APP_PATHS.learnItems}>
+                <Route element={<LearnItems />} index />
+                <Route element={<EachLearnItem />} path=":id" />
               </Route>
               <Route element={<Navigate to={APP_PATHS.home} />} path="*" />
             </Route>

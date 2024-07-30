@@ -5,7 +5,7 @@ import { APP_PATHS } from "../../constants";
 import styles from "./News.module.scss";
 
 const News = () => {
-  const tempNews = 4;
+  console.log("News");
 
   return (
     <div className={styles.container}>
