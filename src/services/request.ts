@@ -1,7 +1,9 @@
 import axios, { type AxiosRequestConfig } from "axios";
 
+import { API_BASE_URL, APP_PATHS } from "../constants";
+
 async function request({
-  baseURL = process.env.REACT_APP_BASE_URL,
+  baseURL = API_BASE_URL,
   responseType,
   headers,
   method,
@@ -10,12 +12,12 @@ async function request({
   data,
   url,
 }: Partial<AxiosRequestConfig>) {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("authToken");
 
   const config = {
     headers: {
       ...headers,
-      "x-access-token": token,
+      Authorization: `Bearer ${token}`,
     },
     url: `${baseURL}/${url ?? ""}`,
     responseType,
@@ -28,9 +30,9 @@ async function request({
   try {
     return await axios(config);
   } catch (err: any) {
-    if (err.response.status === 403) {
-      window.location.replace("/auth/login");
-      localStorage.setItem("token", "");
+    if (err.response.status === 401) {
+      window.location.replace(APP_PATHS.login);
+      localStorage.setItem("authToken", "");
     }
 
     throw err;

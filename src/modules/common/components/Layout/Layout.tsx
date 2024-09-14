@@ -1,4 +1,3 @@
-import PrivateRoute from "@modules/common/components/PrivateRoute";
 import { Outlet, Link } from "react-router-dom";
 import { Button } from "@mui/material";
 
@@ -23,9 +22,7 @@ const Layout = () => (
     </div>
     <div className={styles.content}>
       <div className={styles.centralize}>
-        <PrivateRoute>
-          <Outlet />
-        </PrivateRoute>
+        <Outlet />
       </div>
     </div>
   </>
