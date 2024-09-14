@@ -13,8 +13,8 @@ const Layout = () => (
         <Link to={APP_PATHS.news}>
           <Button variant="outlined">News</Button>
         </Link>
-        <Link to={APP_PATHS.partners}>
-          <Button variant="outlined">Partners</Button>
+        <Link to={APP_PATHS.cooperation}>
+          <Button variant="outlined">Cooperation</Button>
         </Link>
         <Link to={APP_PATHS.learnItems}>
           <Button variant="outlined">Learn Items</Button>
