@@ -13,7 +13,19 @@ function* getCooperationSaga() {
     const { data } = yield call(cooperationService.getCooperation);
     yield put(cooperationSlice.actions.getCooperationListSuccessAction(data));
   } catch (error: any) {
-    console.log(error);
+    toast.error(error?.response?.data?.message);
+  } finally {
+    yield put(cooperationSlice.actions.setLoading(false));
+  }
+}
+
+function* deleteCooperationSaga({ payload }: ReturnType<typeof actions.deleteCooperationListAction>) {
+  yield put(cooperationSlice.actions.setLoading(true));
+
+  try {
+    const { data } = yield call(cooperationService.deleteCooperation, payload);
+    yield put(cooperationSlice.actions.getCooperationListSuccessAction(data));
+  } catch (error: any) {
     toast.error(error?.response?.data?.message);
   } finally {
     yield put(cooperationSlice.actions.setLoading(false));
@@ -22,4 +34,5 @@ function* getCooperationSaga() {
 
 export function* watchCooperationSaga(): Generator<ForkEffect> {
   yield takeLatest(actions.getCooperationListAction.type, getCooperationSaga);
+  yield takeLatest(actions.deleteCooperationListAction.type, deleteCooperationSaga);
 }

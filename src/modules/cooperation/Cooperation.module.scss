@@ -1,0 +1,15 @@
+.coopeeration{
+  width: 100%;
+  .buttons{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 16px;
+    margin-top: 8px;
+  }
+
+  .create{
+    margin: 20px auto;
+  }
+}
+
