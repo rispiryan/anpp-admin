@@ -4,15 +4,20 @@ import { cooperationLoadingSelector, cooperationListSelector } from "@modules/co
 import { deleteCooperationListAction, getCooperationListAction } from "@modules/cooperation/store/actions";
 import { type IDeleteCooperation } from "@modules/cooperation/store/types";
 import { useDispatch, useSelector } from "react-redux";
+import Loader from "@modules/common/components/Loader";
 import { type GridColDef } from "@mui/x-data-grid";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
 
 import Table from "../../components/shared/Table";
+import { APP_PATHS } from "../../constants";
+import { formatDate } from "../../utils";
 
 import styles from "./Cooperation.module.scss";
 
 const Cooperation = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const loading = useSelector(cooperationLoadingSelector);
   const cooperationList = useSelector(cooperationListSelector);
 
@@ -37,19 +42,25 @@ const Cooperation = () => {
       flex: 1,
     },
     {
+      renderCell: ({ row }) => (
+        <div className={styles.imageWrap}>
+          <img src={`${process.env.REACT_APP_BASE_URL}/${row.image}`} alt={row.image} />
+        </div>
+      ),
       headerName: "Logo",
       field: "image",
-      flex: 1,
+      width: 120,
     },
     {
+      renderCell: ({ row }) => <>{formatDate(row.createdAt)}</>,
       headerName: "Created At",
       field: "createdAt",
-      flex: 1,
+      width: 180,
     },
     {
       renderCell: ({ row }) => (
         <div className={styles.buttons}>
-          <Button variant="contained" color="secondary">
+          <Button variant="contained" color="secondary" size="small">
             Edit
           </Button>
           <Button
@@ -57,6 +68,7 @@ const Cooperation = () => {
             className={styles.delete}
             variant="contained"
             color="error"
+            size="small"
           >
             Delete
           </Button>
@@ -66,14 +78,20 @@ const Cooperation = () => {
       headerName: "Actions",
       field: "actions",
       sortable: false,
-      width: 250,
+      width: 170,
     },
   ];
-  console.log(loading, "loading");
 
   return (
     <div className={styles.coopeeration}>
-      <Button className={styles.create} variant="contained" color="primary" size="large">
+      <Loader isLoading={loading} />
+      <Button
+        onClick={() => navigate(APP_PATHS.createCooperation)}
+        className={styles.create}
+        variant="contained"
+        color="primary"
+        size="large"
+      >
         Create
       </Button>
       <Table rows={cooperationList} columns={columns} />

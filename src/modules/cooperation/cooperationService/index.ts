@@ -8,9 +8,14 @@ const END_POINTS = {
 };
 
 export function createCooperation(requestData: ICreateCooperation) {
+  console.log(requestData, "requestData");
+
   return request({
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+    data: { ...requestData, image: requestData.image[0] },
     url: `${END_POINTS.create}`,
-    data: requestData,
     method: "POST",
   });
 }

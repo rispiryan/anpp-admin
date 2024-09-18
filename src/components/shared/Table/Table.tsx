@@ -4,11 +4,12 @@ import Box from "@mui/material/Box";
 import styles from "./Table.module.scss";
 
 type ITable = {
+  rowHeight?: number;
   columns: any[];
   rows: any[];
 };
 
-export default function Table({ columns, rows }: ITable) {
+export default function Table({ rowHeight = 50, columns, rows }: ITable) {
   return (
     <Box className={styles.table}>
       <DataGrid
@@ -20,6 +21,7 @@ export default function Table({ columns, rows }: ITable) {
           },
         }}
         pageSizeOptions={[10]}
+        rowHeight={rowHeight}
         columns={columns}
         rows={rows}
         disableRowSelectionOnClick

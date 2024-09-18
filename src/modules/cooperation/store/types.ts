@@ -7,10 +7,11 @@ export type ICreateCooperation = {
   title: string;
   link: string;
   image: any;
-  id: string;
 };
 
 export type IDeleteCooperation = {
   image: any;
   id: string;
 };
+
+export type INavigate = (to: string) => void;

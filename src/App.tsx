@@ -1,6 +1,7 @@
 import { ReactQueryProvider } from "@modules/common/components/ReactQueryProvider/ReactQueryProvider";
 import { BrowserRouter, Navigate, Routes, Route } from "react-router-dom";
 import EachLearnItem from "@modules/LearnItems/components/EachLearnItem";
+import CreateCooperation from "@modules/cooperation/Create";
 import EachNews from "@modules/News/components/EachNews";
 import Layout from "@modules/common/components/Layout";
 import Login from "@modules/auth/components/Login";
@@ -42,6 +43,7 @@ export function App() {
               </Route>
               <Route path={APP_PATHS.cooperation}>
                 <Route element={<Cooperation />} index />
+                <Route element={<CreateCooperation />} path="create/:id?" />
               </Route>
               <Route path={APP_PATHS.learnItems}>
                 <Route element={<LearnItems />} index />
