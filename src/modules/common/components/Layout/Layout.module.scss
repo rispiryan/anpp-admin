@@ -3,13 +3,20 @@
 .headerContainer {
   position: fixed;
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
   top: 0;
   z-index: 21;
   height: 70px;
   width: 100%;
   background-color: var(--grey-30);
   box-shadow: 0 2px 20px 0 rgba(#00131A, 0.1);
+
+  .avatar{
+    margin-right: 24px;
+    cursor: pointer;
+    display: flex;
+  }
 }
 
 .headerContentWrapper {

@@ -24,6 +24,22 @@ function* loginSaga({ payload }: ReturnType<typeof actions.loginAction>) {
   }
 }
 
+function* getProfileSaga() {
+  yield put(authSlice.actions.setLoading(true));
+
+  try {
+    const { data } = yield call(authService.getProfile);
+    console.log(data, 3223);
+
+    yield put(authSlice.actions.loginSuccessAction(data));
+  } catch (error: any) {
+    toast.error(error?.response?.data?.message);
+  } finally {
+    yield put(authSlice.actions.setLoading(false));
+  }
+}
+
 export function* watchAuthSaga(): Generator<ForkEffect> {
   yield takeLatest(actions.loginAction.type, loginSaga);
+  yield takeLatest(actions.getProfileAction.type, getProfileSaga);
 }
