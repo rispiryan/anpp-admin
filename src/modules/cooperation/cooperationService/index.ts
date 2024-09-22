@@ -1,15 +1,26 @@
-import { type ICreateCooperation, type IDeleteCooperation } from "../store/types";
+import { type ICreateCooperation, type IDeleteCooperation, type IUpdateCooperation } from "../store/types";
 import request from "../../../services/request";
 
 const END_POINTS = {
   cooperationList: "cooperation",
   create: "cooperation/create",
+  update: "cooperation/update",
   delete: "cooperation/delete",
+  cooperation: "cooperation",
 };
 
-export function createCooperation(requestData: ICreateCooperation) {
-  console.log(requestData, "requestData");
+export function updateCooperation(requestData: IUpdateCooperation, id: string) {
+  return request({
+    data: { ...requestData, image: requestData?.image[0] || null },
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+    url: `${END_POINTS.update}/${id}`,
+    method: "PATCH",
+  });
+}
 
+export function createCooperation(requestData: ICreateCooperation) {
   return request({
     headers: {
       "Content-Type": "multipart/form-data",
@@ -23,6 +34,12 @@ export function createCooperation(requestData: ICreateCooperation) {
 export function getCooperation() {
   return request({
     url: `${END_POINTS.cooperationList}`,
+  });
+}
+
+export function getSingleCooperation(id: string) {
+  return request({
+    url: `${END_POINTS.cooperation}/${id}`,
   });
 }
 

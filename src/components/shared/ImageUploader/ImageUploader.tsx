@@ -150,32 +150,15 @@ const ImageUploader = ({
       {!!imageUrls?.length && (
         <div className={cn([styles.documents], { [styles.bigImages]: isBig })}>
           {imageUrls?.map((imageUrl: string | File, index: number) => (
-            <div
-              className={cn(
-                {
-                  [styles.image]:
-                    typeof imageUrl !== "string"
-                      ? imageUrl.type.includes("image/png") || imageUrl.type.includes("image/jpeg")
-                      : imageUrl.includes(".png") || imageUrl.includes(".jpeg"),
-                },
-                {
-                  [styles.document]:
-                    typeof imageUrl !== "string"
-                      ? imageUrl.type.includes("pdf") || imageUrl.type.includes("image/jpeg")
-                      : imageUrl.includes(".pdf"),
-                },
-              )}
-              key={typeof imageUrl !== "string" ? imageUrl?.name : imageUrl}
-            >
+            <div key={typeof imageUrl !== "string" ? imageUrl?.name : imageUrl} className={cn(styles.image)}>
               {isPdf(imageUrl) ? (
-                // <SvgIcon icon={'document'} />
                 <>
                   <div className={styles.pdfDocumentContainer}>
                     <div className={styles.file}>
                       <Document
                         file={
                           typeof imageUrl === "string"
-                            ? `${process.env.REACT_APP_BASE_URL}/api/document?path=${imageUrl}`
+                            ? `${process.env.REACT_APP_BASE_URL}/${imageUrl}`
                             : URL.createObjectURL(new Blob([imageUrl]))
                         }
                       >
@@ -192,7 +175,7 @@ const ImageUploader = ({
                 <img
                   src={
                     typeof imageUrl === "string"
-                      ? `${process.env.REACT_APP_BASE_URL}/api/document?path=${imageUrl}`
+                      ? `${process.env.REACT_APP_BASE_URL}/${imageUrl}`
                       : URL.createObjectURL(new Blob([imageUrl]))
                   }
                   alt={`Uploaded ${index + 1}`}

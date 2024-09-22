@@ -20,6 +20,19 @@ function* getCooperationSaga() {
   }
 }
 
+function* getSingleCooperationSaga({ payload }: ReturnType<typeof actions.getCooperationAction>) {
+  yield put(cooperationSlice.actions.setLoading(true));
+
+  try {
+    const { data } = yield call(cooperationService.getSingleCooperation, payload);
+    yield put(cooperationSlice.actions.getCooperationSuccessAction(data));
+  } catch (error: any) {
+    toast.error(error?.response?.data?.message);
+  } finally {
+    yield put(cooperationSlice.actions.setLoading(false));
+  }
+}
+
 function* deleteCooperationSaga({ payload }: ReturnType<typeof actions.deleteCooperationListAction>) {
   yield put(cooperationSlice.actions.setLoading(true));
 
@@ -48,8 +61,25 @@ function* createCooperationSaga({ payload }: ReturnType<typeof actions.createCoo
   }
 }
 
+function* updateCooperationSaga({ payload }: ReturnType<typeof actions.updateCooperationListAction>) {
+  yield put(cooperationSlice.actions.setLoading(true));
+
+  try {
+    const { data } = yield call(cooperationService.updateCooperation, payload.data, payload.id);
+    yield put(cooperationSlice.actions.getCooperationListSuccessAction(data));
+    toast.success("Cooperation was successfully updated");
+    payload.navigate(APP_PATHS.cooperation);
+  } catch (error: any) {
+    toast.error(error?.response?.data?.message);
+  } finally {
+    yield put(cooperationSlice.actions.setLoading(false));
+  }
+}
+
 export function* watchCooperationSaga(): Generator<ForkEffect> {
   yield takeLatest(actions.getCooperationListAction.type, getCooperationSaga);
   yield takeLatest(actions.deleteCooperationListAction.type, deleteCooperationSaga);
   yield takeLatest(actions.createCooperationListAction.type, createCooperationSaga);
+  yield takeLatest(actions.updateCooperationListAction.type, updateCooperationSaga);
+  yield takeLatest(actions.getCooperationAction.type, getSingleCooperationSaga);
 }

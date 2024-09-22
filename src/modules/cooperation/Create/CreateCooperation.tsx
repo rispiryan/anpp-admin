@@ -1,11 +1,17 @@
+import { useEffect } from "react";
+
+import {
+  createCooperationListAction,
+  updateCooperationListAction,
+  getCooperationAction,
+} from "@modules/cooperation/store/actions";
+import { cooperationLoadingSelector, cooperationSelector } from "@modules/cooperation/store/selectors";
 import { cooperationSchema } from "@modules/cooperation/Create/validations/validations";
-import { cooperationLoadingSelector } from "@modules/cooperation/store/selectors";
-import { createCooperationListAction } from "@modules/cooperation/store/actions";
 import { type ICreateCooperation } from "@modules/cooperation/store/types";
 import { Controller, useWatch, useForm } from "react-hook-form";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useNavigate } from "react-router-dom";
 import { Button, Box } from "@mui/material";
 
 import ImageUploader from "../../../components/shared/ImageUploader";
@@ -15,8 +21,10 @@ import styles from "./CreateCooperation.module.scss";
 
 const CreateCooperation = () => {
   const loading = useSelector(cooperationLoadingSelector);
+  const cooperation = useSelector(cooperationSelector);
   const navigate = useNavigate();
-
+  const params = useParams();
+  console.log(params, 2332);
   const dispatch = useDispatch();
   const {
     formState: { errors },
@@ -33,8 +41,27 @@ const CreateCooperation = () => {
   const imageCover = useWatch({ name: "image", control });
 
   const onSubmit = (data: ICreateCooperation) => {
-    dispatch(createCooperationListAction({ navigate, data }));
+    if (params.id) {
+      dispatch(updateCooperationListAction({ id: params.id, navigate, data }));
+    } else {
+      dispatch(createCooperationListAction({ navigate, data }));
+    }
   };
+
+  useEffect(() => {
+    if (params.id) {
+      dispatch(getCooperationAction(params.id));
+    }
+  }, [dispatch, params.id]);
+
+  useEffect(() => {
+    if (cooperation) {
+      const { image, title, link } = cooperation;
+      setValue("image", [image]);
+      setValue("title", title);
+      setValue("link", link);
+    }
+  }, [cooperation, setValue]);
 
   return (
     <Box className={styles.createCooperation}>

@@ -60,7 +60,12 @@ const Cooperation = () => {
     {
       renderCell: ({ row }) => (
         <div className={styles.buttons}>
-          <Button variant="contained" color="secondary" size="small">
+          <Button
+            onClick={() => navigate(`${APP_PATHS.createCooperation}${row.id}`)}
+            variant="contained"
+            color="secondary"
+            size="small"
+          >
             Edit
           </Button>
           <Button
