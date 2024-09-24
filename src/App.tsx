@@ -16,7 +16,6 @@ import { APP_PATHS } from "./constants";
 
 export function App() {
   const store = setupStore();
-  console.log(process.env.REACT_APP_API_URL);
 
   return (
     <Provider store={store}>
