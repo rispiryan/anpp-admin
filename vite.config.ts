@@ -38,7 +38,8 @@ export default {
     },
   },
   esbuild: {
-    drop: process.env.NODE_ENV === "production" ? ["console", "debugger"] : undefined,
+    drop: process.env.NODE_ENV === "production" ? ["debugger"] : undefined,
+    // drop: process.env.NODE_ENV === "production" ? ["console", "debugger"] : undefined,
     target: "esnext",
   },
   resolve: {
