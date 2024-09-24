@@ -38,7 +38,7 @@ const Layout = () => {
   const id = open ? "simple-popover" : undefined;
 
   if (!user) {
-    return null
+    return null;
   }
 
   return (
