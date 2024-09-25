@@ -9,6 +9,10 @@ ul li {
     outline: none !important;
 }
 
+*{
+    box-sizing: border-box;
+}
+
 body.menu_opened {
     overflow: hidden;
 }

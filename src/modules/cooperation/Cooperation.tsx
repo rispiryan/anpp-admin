@@ -30,9 +30,21 @@ const Cooperation = () => {
   };
 
   const columns: GridColDef<(typeof cooperationList)[number]>[] = [
-    { headerName: "ID", field: "id", width: 90 },
     {
-      headerName: "Title",
+      renderCell: ({ row }) => (
+        <div className={styles.titleBox}>
+          <div className={styles.title}>
+            <b className={styles.country}>Ar:</b> <span>{row.ar_title}</span>
+          </div>
+          <div className={styles.title}>
+            <b className={styles.country}>En:</b> <span>{row.en_title || "-"}</span>
+          </div>
+          <div className={styles.title}>
+            <b className={styles.country}>Ru:</b> <span>{row.ru_title || "-"}</span>
+          </div>
+        </div>
+      ),
+      headerName: "Titles",
       field: "title",
       flex: 1,
     },

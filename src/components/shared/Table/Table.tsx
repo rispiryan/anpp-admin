@@ -9,7 +9,7 @@ type ITable = {
   rows: any[];
 };
 
-export default function Table({ rowHeight = 50, columns, rows }: ITable) {
+export default function Table({ columns, rows }: ITable) {
   return (
     <Box className={styles.table}>
       <DataGrid
@@ -20,8 +20,8 @@ export default function Table({ rowHeight = 50, columns, rows }: ITable) {
             },
           },
         }}
+        getRowHeight={() => "auto"}
         pageSizeOptions={[10]}
-        rowHeight={rowHeight}
         columns={columns}
         rows={rows}
         disableRowSelectionOnClick

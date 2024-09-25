@@ -5,20 +5,26 @@ export type ICooperationState = {
 };
 export type ICooperation = {
   createdAt: string;
-  title: string;
+  en_title: string;
+  ru_title: string;
+  ar_title: string;
   image: string;
   link: string;
   id: string;
 };
 
 export type ICreateCooperation = {
-  title: string;
+  en_title?: string;
+  ru_title?: string;
+  ar_title: string;
   link: string;
   image: any;
 };
 
 export type IUpdateCooperation = {
-  title: string;
+  en_title?: string;
+  ru_title?: string;
+  ar_title: string;
   link: string;
   image?: any;
 };

@@ -24,7 +24,7 @@ const CreateCooperation = () => {
   const cooperation = useSelector(cooperationSelector);
   const navigate = useNavigate();
   const params = useParams();
-  console.log(params, 2332);
+
   const dispatch = useDispatch();
   const {
     formState: { errors },
@@ -33,7 +33,9 @@ const CreateCooperation = () => {
     control,
   } = useForm({
     defaultValues: {
-      title: "",
+      ar_title: "",
+      en_title: "",
+      ru_title: "",
       link: "",
     },
     resolver: yupResolver(cooperationSchema),
@@ -56,9 +58,11 @@ const CreateCooperation = () => {
 
   useEffect(() => {
     if (cooperation) {
-      const { image, title, link } = cooperation;
+      const { en_title, ar_title, ru_title, image, link } = cooperation;
       setValue("image", [image]);
-      setValue("title", title);
+      setValue("en_title", en_title);
+      setValue("ru_title", ru_title);
+      setValue("ar_title", ar_title);
       setValue("link", link);
     }
   }, [cooperation, setValue]);
@@ -74,20 +78,32 @@ const CreateCooperation = () => {
           imageUrls={imageCover}
           isBig
         />
+        <Box className={styles.titles}>
+          <Controller
+            render={({ field }) => (
+              <Input
+                helperText={errors?.ar_title?.message}
+                error={!!errors?.ar_title?.message}
+                className={styles.input}
+                label="Ar Title"
+                {...field}
+              />
+            )}
+            control={control}
+            name="ar_title"
+          />
+          <Controller
+            render={({ field }) => <Input className={styles.input} label="En Title" {...field} />}
+            control={control}
+            name="en_title"
+          />
+          <Controller
+            render={({ field }) => <Input className={styles.input} label="Ru Title" {...field} />}
+            control={control}
+            name="ru_title"
+          />
+        </Box>
 
-        <Controller
-          render={({ field }) => (
-            <Input
-              helperText={errors?.title?.message}
-              error={!!errors?.title?.message}
-              className={styles.input}
-              label="Title"
-              {...field}
-            />
-          )}
-          control={control}
-          name="title"
-        />
         <Controller
           render={({ field }) => (
             <Input
