@@ -37,6 +37,10 @@ const Layout = () => {
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
 
+  if (!user) {
+    return null;
+  }
+
   return (
     <>
       <div className={styles.headerContainer}>
