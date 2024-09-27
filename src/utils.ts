@@ -38,3 +38,18 @@ export const formatDate = (date: string | Date, format: DateFormat = DateFormat.
 
   return datesFormat[format];
 };
+
+type DirtyFields = Record<string, boolean>;
+
+export const convertDataForUpdate = <T extends object>(data: T, dirtyFields: DirtyFields): Partial<T> => {
+  const newData: Partial<T> = {};
+  const fields = Object.keys(dirtyFields) as (keyof T)[];
+
+  fields.forEach((field) => {
+    if (field in data) {
+      newData[field] = data[field];
+    }
+  });
+
+  return newData;
+};

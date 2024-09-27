@@ -46,7 +46,7 @@ function* deleteCooperationSaga({ payload }: ReturnType<typeof actions.deleteCoo
   }
 }
 
-function* createCooperationSaga({ payload }: ReturnType<typeof actions.createCooperationListAction>) {
+function* createCooperationSaga({ payload }: ReturnType<typeof actions.createCooperationAction>) {
   yield put(cooperationSlice.actions.setLoading(true));
 
   try {
@@ -79,7 +79,7 @@ function* updateCooperationSaga({ payload }: ReturnType<typeof actions.updateCoo
 export function* watchCooperationSaga(): Generator<ForkEffect> {
   yield takeLatest(actions.getCooperationListAction.type, getCooperationSaga);
   yield takeLatest(actions.deleteCooperationListAction.type, deleteCooperationSaga);
-  yield takeLatest(actions.createCooperationListAction.type, createCooperationSaga);
+  yield takeLatest(actions.createCooperationAction.type, createCooperationSaga);
   yield takeLatest(actions.updateCooperationListAction.type, updateCooperationSaga);
   yield takeLatest(actions.getCooperationAction.type, getSingleCooperationSaga);
 }

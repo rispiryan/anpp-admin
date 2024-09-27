@@ -2,7 +2,6 @@ import { type ICreateCooperation, type IDeleteCooperation, type IUpdateCooperati
 import request from "../../../services/request";
 
 const END_POINTS = {
-  cooperationList: "cooperation",
   create: "cooperation/create",
   update: "cooperation/update",
   delete: "cooperation/delete",
@@ -33,7 +32,7 @@ export function createCooperation(requestData: ICreateCooperation) {
 
 export function getCooperation() {
   return request({
-    url: `${END_POINTS.cooperationList}`,
+    url: `${END_POINTS.cooperation}`,
   });
 }
 
@@ -46,7 +45,7 @@ export function getSingleCooperation(id: string) {
 export function deleteCooperation(data: IDeleteCooperation) {
   return request({
     url: `${END_POINTS.delete}`,
-    method: "POST",
+    method: "DELETE",
     data,
   });
 }

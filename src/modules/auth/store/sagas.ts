@@ -29,7 +29,6 @@ function* getProfileSaga() {
 
   try {
     const { data } = yield call(authService.getProfile);
-    console.log(data, 3223);
 
     yield put(authSlice.actions.loginSuccessAction(data));
   } catch (error: any) {

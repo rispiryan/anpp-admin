@@ -175,7 +175,7 @@ const ImageUploader = ({
                 <img
                   src={
                     typeof imageUrl === "string"
-                      ? `${process.env.REACT_APP_BASE_URL}/${imageUrl}`
+                      ? `${process.env.REACT_APP_API_URL}/${imageUrl}`
                       : URL.createObjectURL(new Blob([imageUrl]))
                   }
                   alt={`Uploaded ${index + 1}`}

@@ -3,10 +3,12 @@ import { BrowserRouter, Navigate, Routes, Route } from "react-router-dom";
 import EachLearnItem from "@modules/LearnItems/components/EachLearnItem";
 import CreateCooperation from "@modules/cooperation/Create";
 import EachNews from "@modules/News/components/EachNews";
+import CreateVacancies from "@modules/Vacancies/Create";
 import Layout from "@modules/common/components/Layout";
 import Login from "@modules/auth/components/Login";
 import Cooperation from "@modules/cooperation";
 import LearnItems from "@modules/LearnItems";
+import Vacancies from "@modules/Vacancies";
 import { Toaster } from "react-hot-toast";
 import { Provider } from "react-redux";
 import News from "@modules/News";
@@ -44,6 +46,10 @@ export function App() {
               <Route path={APP_PATHS.cooperation}>
                 <Route element={<Cooperation />} index />
                 <Route element={<CreateCooperation />} path="create/:id?" />
+              </Route>
+              <Route path={APP_PATHS.vacancies}>
+                <Route element={<Vacancies />} index />
+                <Route element={<CreateVacancies />} path="create/:id?" />
               </Route>
               <Route path={APP_PATHS.learnItems}>
                 <Route element={<LearnItems />} index />

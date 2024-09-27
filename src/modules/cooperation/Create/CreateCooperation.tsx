@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 
 import {
-  createCooperationListAction,
   updateCooperationListAction,
+  createCooperationAction,
   getCooperationAction,
 } from "@modules/cooperation/store/actions";
 import { cooperationLoadingSelector, cooperationSelector } from "@modules/cooperation/store/selectors";
@@ -46,7 +46,7 @@ const CreateCooperation = () => {
     if (params.id) {
       dispatch(updateCooperationListAction({ id: params.id, navigate, data }));
     } else {
-      dispatch(createCooperationListAction({ navigate, data }));
+      dispatch(createCooperationAction({ navigate, data }));
     }
   };
 
@@ -69,7 +69,7 @@ const CreateCooperation = () => {
 
   return (
     <Box className={styles.createCooperation}>
-      <h2>Create Cooperation</h2>
+      <h2>{`${cooperation?.id ? "Update" : "Create"} Cooperation`}</h2>
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
         <ImageUploader
           setImageUrls={(value) => setValue("image", value)}
@@ -118,7 +118,7 @@ const CreateCooperation = () => {
           name="link"
         />
         <Button className={styles.button} variant="contained" disabled={loading} type="submit">
-          Create
+          {cooperation?.id ? "Update" : "Create"}
         </Button>
       </form>
     </Box>

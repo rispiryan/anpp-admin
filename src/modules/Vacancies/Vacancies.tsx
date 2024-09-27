@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 
-import { cooperationLoadingSelector, cooperationListSelector } from "@modules/cooperation/store/selectors";
-import { deleteCooperationListAction, getCooperationListAction } from "@modules/cooperation/store/actions";
-import { type IDeleteCooperation } from "@modules/cooperation/store/types";
+import { vacanciesLoadingSelector, vacanciesListSelector } from "@modules/Vacancies/store/selectors";
+import { getVacanciesListAction, deleteVacanciesAction } from "@modules/Vacancies/store/actions";
+import { type IDeleteVacancies } from "@modules/Vacancies/store/types";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "@modules/common/components/Loader";
 import { type GridColDef } from "@mui/x-data-grid";
@@ -13,23 +13,23 @@ import Table from "../../components/shared/Table";
 import { APP_PATHS } from "../../constants";
 import { formatDate } from "../../utils";
 
-import styles from "./Cooperation.module.scss";
+import styles from "./Vacancies.module.scss";
 
-const Cooperation = () => {
+const Vacancies = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const loading = useSelector(cooperationLoadingSelector);
-  const cooperationList = useSelector(cooperationListSelector);
+  const vacancies = useSelector(vacanciesListSelector);
+  const loading = useSelector(vacanciesLoadingSelector);
 
-  useEffect(() => {
-    dispatch(getCooperationListAction());
-  }, [dispatch]);
-
-  const handleDelete = (params: IDeleteCooperation) => {
-    dispatch(deleteCooperationListAction(params));
+  const handleDelete = (params: IDeleteVacancies) => {
+    dispatch(deleteVacanciesAction(params));
   };
 
-  const columns: GridColDef<(typeof cooperationList)[number]>[] = [
+  useEffect(() => {
+    dispatch(getVacanciesListAction());
+  }, [dispatch]);
+
+  const columns: GridColDef<(typeof vacancies)[number]>[] = [
     {
       renderCell: ({ row }) => (
         <div className={styles.titleBox}>
@@ -49,19 +49,27 @@ const Cooperation = () => {
       flex: 1,
     },
     {
-      headerName: "Link",
-      field: "link",
+      renderCell: ({ row }) => (
+        <div className={styles.titleBox}>
+          <div className={styles.title}>
+            <b className={styles.country}>Ar:</b> <span>{row.ar_title}</span>
+          </div>
+          <div className={styles.title}>
+            <b className={styles.country}>En:</b> <span>{row.en_title || "-"}</span>
+          </div>
+          <div className={styles.title}>
+            <b className={styles.country}>Ru:</b> <span>{row.ru_title || "-"}</span>
+          </div>
+        </div>
+      ),
+      headerName: "Descriptions",
+      field: "ar_description",
       flex: 1,
     },
     {
-      renderCell: ({ row }) => (
-        <div className={styles.imageWrap}>
-          <img src={`${process.env.REACT_APP_API_URL}/${row.image}`} alt={row.image} />
-        </div>
-      ),
-      headerName: "Logo",
-      field: "image",
-      width: 120,
+      headerName: "Link",
+      field: "link",
+      flex: 1,
     },
     {
       renderCell: ({ row }) => <>{formatDate(row.createdAt)}</>,
@@ -73,7 +81,7 @@ const Cooperation = () => {
       renderCell: ({ row }) => (
         <div className={styles.buttons}>
           <Button
-            onClick={() => navigate(`${APP_PATHS.createCooperation}${row.id}`)}
+            onClick={() => navigate(`${APP_PATHS.createVacancies}${row.id}`)}
             variant="contained"
             color="secondary"
             size="small"
@@ -81,7 +89,7 @@ const Cooperation = () => {
             Edit
           </Button>
           <Button
-            onClick={() => handleDelete({ image: row.image, id: row.id })}
+            onClick={() => handleDelete({ id: row.id })}
             className={styles.delete}
             variant="contained"
             color="error"
@@ -100,11 +108,11 @@ const Cooperation = () => {
   ];
 
   return (
-    <div className={styles.coopeeration}>
+    <div className={styles.vacancies}>
+      <h1>Vacancies</h1>
       <Loader isLoading={loading} />
-      <h1>Cooperation</h1>
       <Button
-        onClick={() => navigate(APP_PATHS.createCooperation)}
+        onClick={() => navigate(APP_PATHS.createVacancies)}
         className={styles.create}
         variant="contained"
         color="primary"
@@ -112,9 +120,9 @@ const Cooperation = () => {
       >
         Create
       </Button>
-      <Table rows={cooperationList} columns={columns} />
+      <Table columns={columns} rows={vacancies} />
     </div>
   );
 };
 
-export default Cooperation;
+export default Vacancies;
