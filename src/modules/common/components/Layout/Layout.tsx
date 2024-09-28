@@ -54,14 +54,15 @@ const Layout = () => {
           <Link to={APP_PATHS.vacancies}>
             <Button variant="outlined">Vacancies</Button>
           </Link>
+          <Link to={APP_PATHS.employees}>
+            <Button variant="outlined">Employees</Button>
+          </Link>
           <Link to={APP_PATHS.learnItems}>
             <Button variant="outlined">Learn Items</Button>
           </Link>
         </div>
         <div className={styles.avatar}>
-          <Typography sx={{ cursor: "pointer", p: 2 }} onClick={logout}>
-            {user?.fullName || ""}
-          </Typography>
+          <Typography sx={{ p: 2 }}>{user?.fullName || ""}</Typography>
           <Button onClick={handleClick}>
             {!!user && (
               <Avatar className={styles.firstCharacter} alt={user.fullName[0]}>

@@ -68,7 +68,7 @@ const CreateVacancies = () => {
   }, [vacancies, setValue]);
 
   return (
-    <Box className={styles.createCooperation}>
+    <Box className={styles.create}>
       <h2>{`${vacancies?.id ? "Update" : "Create"} Vacancies`}</h2>
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
         <Box className={styles.titles}>
