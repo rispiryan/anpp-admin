@@ -2,7 +2,7 @@ import { useEffect } from "react";
 
 import { employeesLoadingSelector, employeesListSelector } from "@modules/Employees/store/selectors";
 import { getEmployeesListAction, deleteEmployeesAction } from "@modules/Employees/store/actions";
-import { type IDeleteCooperation } from "@modules/cooperation/store/types";
+import { type IDeleteCooperation } from "@modules/Cooperation/store/types";
 import Loader from "@modules/common/components/Loader";
 import { useDispatch, useSelector } from "react-redux";
 import { type GridColDef } from "@mui/x-data-grid";

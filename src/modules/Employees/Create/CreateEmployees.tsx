@@ -44,8 +44,6 @@ const CreateEmployees = () => {
     resolver: yupResolver(employeesSchema),
   });
   const imageCover = useWatch({ name: "image", control });
-  console.log(dirtyFields, "dirtyFields");
-  console.log(imageCover, "imageCover");
 
   const onSubmit = (data: ICreateEmployees) => {
     if (params.id) {

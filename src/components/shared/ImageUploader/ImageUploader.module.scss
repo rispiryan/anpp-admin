@@ -1,6 +1,9 @@
 .imageUploader {
   display: flex;
   align-items: center;
+  word-wrap: break-word;
+  word-break: break-all;
+  text-wrap: revert;
   .uploadButton {
     width: 100px;
     min-width: 100px;

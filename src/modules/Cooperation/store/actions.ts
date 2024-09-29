@@ -3,7 +3,7 @@ import {
   type IDeleteCooperation,
   type IUpdateCooperation,
   type INavigate,
-} from "@modules/cooperation/store/types";
+} from "@modules/Cooperation/store/types";
 import { createAction } from "@reduxjs/toolkit";
 export const getCooperationListAction = createAction("getCooperationListAction");
 export const deleteCooperationListAction = createAction<IDeleteCooperation>("deleteCooperationListAction");

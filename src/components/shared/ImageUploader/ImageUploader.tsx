@@ -149,21 +149,23 @@ const ImageUploader = ({
       {!hasErrorBlock && errorMessage && <p className={styles.error}>{errorMessage}</p>}
       {!!imageUrls?.length && (
         <div className={cn([styles.documents], { [styles.bigImages]: isBig })}>
-          {imageUrls?.map((imageUrl: string | File, index: number) => (
+          {imageUrls?.map((imageUrl: any, index: number) => (
             <div key={typeof imageUrl !== "string" ? imageUrl?.name : imageUrl} className={cn(styles.image)}>
               {isPdf(imageUrl) ? (
                 <>
                   <div className={styles.pdfDocumentContainer}>
                     <div className={styles.file}>
-                      <Document
-                        file={
-                          typeof imageUrl === "string"
-                            ? `${process.env.REACT_APP_BASE_URL}/${imageUrl}`
-                            : URL.createObjectURL(new Blob([imageUrl]))
-                        }
-                      >
-                        <Page pageNumber={1} width={150} />
-                      </Document>
+                      {imageUrl?.type?.includes("pdf") || imageUrl?.includes("pdf") ? null : (
+                        <Document
+                          file={
+                            typeof imageUrl === "string"
+                              ? `${process.env.REACT_APP_BASE_URL}/${imageUrl}`
+                              : URL.createObjectURL(new Blob([imageUrl]))
+                          }
+                        >
+                          <Page pageNumber={1} width={150} />
+                        </Document>
+                      )}
                     </div>
                     <div className={styles.fileBlock}></div>
                     <div className={styles.fileName}>

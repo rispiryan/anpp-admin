@@ -57,6 +57,9 @@ const Layout = () => {
           <Link to={APP_PATHS.employees}>
             <Button variant="outlined">Employees</Button>
           </Link>
+          <Link to={APP_PATHS.reports}>
+            <Button variant="outlined">Reports</Button>
+          </Link>
           <Link to={APP_PATHS.learnItems}>
             <Button variant="outlined">Learn Items</Button>
           </Link>

@@ -57,7 +57,11 @@ const EachLearnItem = () => {
         <TextField onChange={(e) => setLink(e.target.value)} label="Link" value={link} />
         <Button startIcon={<CloudUploadIcon />} variant="contained" component="label" role={undefined} tabIndex={-1}>
           Upload file
-          <VisuallyHiddenInput onChange={handleOnUpload} accept="image/*" type="file" />
+          <VisuallyHiddenInput
+            accept="application/pdf,application/vnd.ms-excel"
+            onChange={handleOnUpload}
+            type="file"
+          />
         </Button>
         {img && <img src={img} alt="#" />}
         <Button onClick={handleSubmit} variant="contained">

@@ -2,9 +2,9 @@ import { type ICreateCooperation, type IDeleteCooperation, type IUpdateCooperati
 import request from "../../../services/request";
 
 const END_POINTS = {
-  create: "cooperation/create",
-  update: "cooperation/update",
-  delete: "cooperation/delete",
+  create: "Cooperation/create",
+  update: "Cooperation/update",
+  delete: "Cooperation/delete",
   cooperation: "cooperation",
 };
 

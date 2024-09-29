@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 
-import { cooperationLoadingSelector, cooperationListSelector } from "@modules/cooperation/store/selectors";
-import { deleteCooperationListAction, getCooperationListAction } from "@modules/cooperation/store/actions";
-import { type IDeleteCooperation } from "@modules/cooperation/store/types";
+import { cooperationLoadingSelector, cooperationListSelector } from "@modules/Cooperation/store/selectors";
+import { deleteCooperationListAction, getCooperationListAction } from "@modules/Cooperation/store/actions";
+import { type IDeleteCooperation } from "@modules/Cooperation/store/types";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "@modules/common/components/Loader";
 import { type GridColDef } from "@mui/x-data-grid";

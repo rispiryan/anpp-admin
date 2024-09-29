@@ -1,18 +1,20 @@
 import { ReactQueryProvider } from "@modules/common/components/ReactQueryProvider/ReactQueryProvider";
 import { BrowserRouter, Navigate, Routes, Route } from "react-router-dom";
 import EachLearnItem from "@modules/LearnItems/components/EachLearnItem";
-import CreateCooperation from "@modules/cooperation/Create";
+import CreateCooperation from "@modules/Cooperation/Create";
 import EachNews from "@modules/News/components/EachNews";
 import CreateVacancies from "@modules/Vacancies/Create";
 import CreateEmployees from "@modules/Employees/Create";
 import Layout from "@modules/common/components/Layout";
+import CreateReports from "@modules/Reports/Create";
 import Login from "@modules/auth/components/Login";
-import Cooperation from "@modules/cooperation";
+import Cooperation from "@modules/Cooperation";
 import LearnItems from "@modules/LearnItems";
 import Vacancies from "@modules/Vacancies";
 import Employees from "@modules/Employees";
 import { Toaster } from "react-hot-toast";
 import { Provider } from "react-redux";
+import Reports from "@modules/Reports";
 import News from "@modules/News";
 
 import { setupStore } from "./store/setupStore";
@@ -56,6 +58,10 @@ export function App() {
               <Route path={APP_PATHS.employees}>
                 <Route element={<Employees />} index />
                 <Route element={<CreateEmployees />} path="create/:id?" />
+              </Route>
+              <Route path={APP_PATHS.reports}>
+                <Route element={<Reports />} index />
+                <Route element={<CreateReports />} path="create/:id?" />
               </Route>
               <Route path={APP_PATHS.learnItems}>
                 <Route element={<LearnItems />} index />

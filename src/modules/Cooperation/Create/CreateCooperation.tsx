@@ -4,10 +4,10 @@ import {
   updateCooperationListAction,
   createCooperationAction,
   getCooperationAction,
-} from "@modules/cooperation/store/actions";
-import { cooperationLoadingSelector, cooperationSelector } from "@modules/cooperation/store/selectors";
-import { cooperationSchema } from "@modules/cooperation/Create/validations/validations";
-import { type ICreateCooperation } from "@modules/cooperation/store/types";
+} from "@modules/Cooperation/store/actions";
+import { cooperationLoadingSelector, cooperationSelector } from "@modules/Cooperation/store/selectors";
+import { cooperationSchema } from "@modules/Cooperation/Create/validations/validations";
+import { type ICreateCooperation } from "@modules/Cooperation/store/types";
 import { Controller, useWatch, useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";

@@ -52,13 +52,13 @@ const Vacancies = () => {
       renderCell: ({ row }) => (
         <div className={styles.titleBox}>
           <div className={styles.title}>
-            <b className={styles.country}>Ar:</b> <span>{row.ar_title}</span>
+            <b className={styles.country}>Ar:</b> <span>{row.ar_description}</span>
           </div>
           <div className={styles.title}>
-            <b className={styles.country}>En:</b> <span>{row.en_title || "-"}</span>
+            <b className={styles.country}>En:</b> <span>{row.en_description || "-"}</span>
           </div>
           <div className={styles.title}>
-            <b className={styles.country}>Ru:</b> <span>{row.ru_title || "-"}</span>
+            <b className={styles.country}>Ru:</b> <span>{row.ru_description || "-"}</span>
           </div>
         </div>
       ),
