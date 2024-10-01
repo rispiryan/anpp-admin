@@ -3,6 +3,7 @@ import { watchVacanciesSaga } from "@modules/Vacancies/store/sagas";
 import { watchEmployeesSaga } from "@modules/Employees/store/sagas";
 import { watchReportsSaga } from "@modules/Reports/store/sagas";
 import { watchAuthSaga } from "@modules/auth/store/sagas";
+import { watchNewsSaga } from "@modules/News/store/sagas";
 import { call, all } from "redux-saga/effects";
 
 export default function* rootSaga() {
@@ -12,5 +13,6 @@ export default function* rootSaga() {
     call(watchVacanciesSaga),
     call(watchEmployeesSaga),
     call(watchReportsSaga),
+    call(watchNewsSaga),
   ]);
 }

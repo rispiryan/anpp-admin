@@ -6,6 +6,7 @@ export const APP_PATHS = {
   createEmployees: "/employees/create/",
   createReports: "/reports/create/",
   cooperation: "/Cooperation",
+  createNews: "/news/create/",
   learnItems: "/learnItems",
   employees: "/employees/",
   vacancies: "/vacancies",

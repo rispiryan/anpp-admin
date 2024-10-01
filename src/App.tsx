@@ -2,13 +2,13 @@ import { ReactQueryProvider } from "@modules/common/components/ReactQueryProvide
 import { BrowserRouter, Navigate, Routes, Route } from "react-router-dom";
 import EachLearnItem from "@modules/LearnItems/components/EachLearnItem";
 import CreateCooperation from "@modules/Cooperation/Create";
-import EachNews from "@modules/News/components/EachNews";
 import CreateVacancies from "@modules/Vacancies/Create";
 import CreateEmployees from "@modules/Employees/Create";
 import Layout from "@modules/common/components/Layout";
 import CreateReports from "@modules/Reports/Create";
 import Login from "@modules/auth/components/Login";
 import Cooperation from "@modules/Cooperation";
+import CreateNews from "@modules/News/Create";
 import LearnItems from "@modules/LearnItems";
 import Vacancies from "@modules/Vacancies";
 import Employees from "@modules/Employees";
@@ -45,7 +45,7 @@ export function App() {
               <Route element={<div>Home</div>} path={APP_PATHS.home} />
               <Route path={APP_PATHS.news}>
                 <Route element={<News />} index />
-                <Route element={<EachNews />} path=":id" />
+                <Route element={<CreateNews />} path="create/:id?" />
               </Route>
               <Route path={APP_PATHS.cooperation}>
                 <Route element={<Cooperation />} index />
