@@ -49,8 +49,21 @@ const News = () => {
       flex: 1,
     },
     {
-      headerName: "Link",
-      field: "link",
+      renderCell: ({ row }) => (
+        <div className={styles.titleBox}>
+          <div className={styles.title}>
+            <b className={styles.country}>Ar:</b> <span>{row.ar_description}</span>
+          </div>
+          <div className={styles.title}>
+            <b className={styles.country}>En:</b> <span>{row.en_description || "-"}</span>
+          </div>
+          <div className={styles.title}>
+            <b className={styles.country}>Ru:</b> <span>{row.ru_description || "-"}</span>
+          </div>
+        </div>
+      ),
+      headerName: "Description",
+      field: "ar_description",
       flex: 1,
     },
     {
@@ -59,7 +72,7 @@ const News = () => {
           <img src={`${process.env.REACT_APP_API_URL}/${row.image}`} alt={row.image} />
         </div>
       ),
-      headerName: "Logo",
+      headerName: "Image",
       field: "image",
       width: 120,
     },
@@ -81,7 +94,12 @@ const News = () => {
             Edit
           </Button>
           <Button
-            onClick={() => handleDelete({ deletedImages: row?.image, id: row.id })}
+            onClick={() =>
+              handleDelete({
+                deletedImages: `${row?.image}${row.contentImages1 ? "," + row.contentImages1 : ""}${row.contentImages2 ? "," + row.contentImages2 : ""}`,
+                id: row.id,
+              })
+            }
             className={styles.delete}
             variant="contained"
             color="error"

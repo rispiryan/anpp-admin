@@ -24,8 +24,10 @@ export function createNews(requestData: ICreateNews) {
     headers: {
       "Content-Type": "multipart/form-data",
     },
+    data: {
+      ...requestData,
+    },
     url: `${END_POINTS.create}`,
-    data: { ...requestData },
     method: "POST",
   });
 }
