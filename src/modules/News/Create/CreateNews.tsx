@@ -12,6 +12,7 @@ import { Button, Box } from "@mui/material";
 
 import ImageUploader from "../../../components/shared/ImageUploader";
 import Input from "../../../components/shared/Input/Input";
+import { convertDataForUpdate } from "../../../utils";
 import Quill from "../../../components/shared/Quill";
 
 import styles from "./CreateNews.module.scss";
@@ -24,7 +25,7 @@ const CreateNews = () => {
 
   const dispatch = useDispatch();
   const {
-    formState: { errors },
+    formState: { dirtyFields, errors },
     handleSubmit,
     setValue,
     control,
@@ -51,10 +52,23 @@ const CreateNews = () => {
   const imageCover = useWatch({ name: "image", control });
   const contentImages1 = useWatch({ name: "contentImages1", control });
   const contentImages2 = useWatch({ name: "contentImages2", control });
+  const deletedFiles = useWatch({ name: "deletedFiles", control });
 
   const onSubmit = (data: ICreateNews) => {
     if (params.id) {
-      dispatch(updateNewsAction({ id: params.id, navigate, data }));
+      dispatch(
+        updateNewsAction({
+          data: convertDataForUpdate(data, {
+            ...dirtyFields,
+            contentImages1: false,
+            contentImages2: false,
+            deletedFiles: false,
+            image: false,
+          }),
+          id: params.id,
+          navigate,
+        }),
+      );
     } else {
       dispatch(createNewsAction({ navigate, data }));
     }
@@ -68,13 +82,50 @@ const CreateNews = () => {
 
   useEffect(() => {
     if (news) {
-      const { en_title, ar_title, ru_title, image } = news;
+      const {
+        en_description,
+        ru_description,
+        ar_description,
+        contentImages1,
+        contentImages2,
+        en_content2,
+        en_content1,
+        ru_content1,
+        ar_content1,
+        ru_content2,
+        ar_content2,
+        en_content3,
+        ru_content3,
+        ar_content3,
+        en_title,
+        ar_title,
+        ru_title,
+        image,
+      } = news;
       setValue("image", [image]);
+      setValue("contentImages1", contentImages1?.length ? [...contentImages1.split(",")] : []);
+      setValue("contentImages2", contentImages2?.length ? [...contentImages2.split(",")] : []);
       setValue("en_title", en_title);
       setValue("ru_title", ru_title);
       setValue("ar_title", ar_title);
+      setValue("en_description", en_description);
+      setValue("ru_description", ru_description);
+      setValue("ar_description", ar_description);
+      setValue("en_content1", en_content1);
+      setValue("ru_content1", ru_content1);
+      setValue("ar_content1", ar_content1);
+      setValue("en_content2", en_content2);
+      setValue("ru_content2", ru_content2);
+      setValue("ar_content2", ar_content2);
+      setValue("en_content3", en_content3);
+      setValue("ru_content3", ru_content3);
+      setValue("ar_content3", ar_content3);
     }
   }, [news, setValue]);
+
+  const deleteFile = (file: string) => {
+    setValue("deletedFiles", deletedFiles?.length ? [...deletedFiles, file] : [file]);
+  };
 
   return (
     <Box className={styles.create}>
@@ -84,7 +135,9 @@ const CreateNews = () => {
           setImageUrls={(value) => setValue("image", value)}
           hasErrorBlock={!!errors?.image?.message}
           message={errors?.image?.message}
+          deleteImage={deleteFile}
           imageUrls={imageCover}
+          limit={1}
           isBig
         />
         <Box className={styles.titles}>
@@ -158,6 +211,7 @@ const CreateNews = () => {
         <ImageUploader
           setImageUrls={(value) => setValue("contentImages1", value)}
           imageUrls={contentImages1}
+          deleteImage={deleteFile}
           limit={3}
           multiple
         />
@@ -181,6 +235,7 @@ const CreateNews = () => {
         <ImageUploader
           setImageUrls={(value) => setValue("contentImages2", value)}
           imageUrls={contentImages2}
+          deleteImage={deleteFile}
           limit={3}
           multiple
         />
