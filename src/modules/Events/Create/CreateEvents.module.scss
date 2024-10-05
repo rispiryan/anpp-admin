@@ -1,0 +1,21 @@
+
+.createEvents{
+  width: 100%;
+  margin: 100px auto;
+  border: 1px solid gray;
+  border-radius: 20px;
+  padding: 20px;
+  .form{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 24px;
+  }
+
+  .titles{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+  }
+}
+
+

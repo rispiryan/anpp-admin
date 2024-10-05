@@ -7,6 +7,7 @@ import CreateEmployees from "@modules/Employees/Create";
 import Layout from "@modules/common/components/Layout";
 import CreateReports from "@modules/Reports/Create";
 import Login from "@modules/auth/components/Login";
+import CreateEvents from "@modules/Events/Create";
 import Cooperation from "@modules/Cooperation";
 import CreateNews from "@modules/News/Create";
 import LearnItems from "@modules/LearnItems";
@@ -15,6 +16,7 @@ import Employees from "@modules/Employees";
 import { Toaster } from "react-hot-toast";
 import { Provider } from "react-redux";
 import Reports from "@modules/Reports";
+import Events from "@modules/Events";
 import News from "@modules/News";
 
 import { setupStore } from "./store/setupStore";
@@ -62,6 +64,10 @@ export function App() {
               <Route path={APP_PATHS.reports}>
                 <Route element={<Reports />} index />
                 <Route element={<CreateReports />} path="create/:id?" />
+              </Route>
+              <Route path={APP_PATHS.events}>
+                <Route element={<Events />} index />
+                <Route element={<CreateEvents />} path="create/:id?" />
               </Route>
               <Route path={APP_PATHS.learnItems}>
                 <Route element={<LearnItems />} index />
