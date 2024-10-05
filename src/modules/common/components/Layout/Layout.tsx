@@ -63,6 +63,9 @@ const Layout = () => {
           <Link to={APP_PATHS.events}>
             <Button variant="outlined">Events</Button>
           </Link>
+          <Link to={APP_PATHS.shopping}>
+            <Button variant="outlined">Shopping</Button>
+          </Link>
           <Link to={APP_PATHS.learnItems}>
             <Button variant="outlined">Learn Items</Button>
           </Link>

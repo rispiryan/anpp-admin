@@ -5,6 +5,7 @@ import CreateCooperation from "@modules/Cooperation/Create";
 import CreateVacancies from "@modules/Vacancies/Create";
 import CreateEmployees from "@modules/Employees/Create";
 import Layout from "@modules/common/components/Layout";
+import CreateShopping from "@modules/Shopping/Create";
 import CreateReports from "@modules/Reports/Create";
 import Login from "@modules/auth/components/Login";
 import CreateEvents from "@modules/Events/Create";
@@ -14,6 +15,7 @@ import LearnItems from "@modules/LearnItems";
 import Vacancies from "@modules/Vacancies";
 import Employees from "@modules/Employees";
 import { Toaster } from "react-hot-toast";
+import Shopping from "@modules/Shopping";
 import { Provider } from "react-redux";
 import Reports from "@modules/Reports";
 import Events from "@modules/Events";
@@ -68,6 +70,10 @@ export function App() {
               <Route path={APP_PATHS.events}>
                 <Route element={<Events />} index />
                 <Route element={<CreateEvents />} path="create/:id?" />
+              </Route>
+              <Route path={APP_PATHS.shopping}>
+                <Route element={<Shopping />} index />
+                <Route element={<CreateShopping />} path="create/:id?" />
               </Route>
               <Route path={APP_PATHS.learnItems}>
                 <Route element={<LearnItems />} index />

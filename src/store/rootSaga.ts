@@ -1,6 +1,7 @@
 import { watchCooperationSaga } from "@modules/Cooperation/store/sagas";
 import { watchVacanciesSaga } from "@modules/Vacancies/store/sagas";
 import { watchEmployeesSaga } from "@modules/Employees/store/sagas";
+import { watchShoppingSaga } from "@modules/Shopping/store/sagas";
 import { watchReportsSaga } from "@modules/Reports/store/sagas";
 import { watchEventsSaga } from "@modules/Events/store/sagas";
 import { watchAuthSaga } from "@modules/auth/store/sagas";
@@ -16,5 +17,6 @@ export default function* rootSaga() {
     call(watchReportsSaga),
     call(watchNewsSaga),
     call(watchEventsSaga),
+    call(watchShoppingSaga),
   ]);
 }
