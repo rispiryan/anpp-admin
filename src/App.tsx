@@ -1,9 +1,10 @@
 import { ReactQueryProvider } from "@modules/common/components/ReactQueryProvider/ReactQueryProvider";
 import { BrowserRouter, Navigate, Routes, Route } from "react-router-dom";
-import EachLearnItem from "@modules/LearnItems/components/EachLearnItem";
 import CreateCooperation from "@modules/Cooperation/Create";
+import CreateDepartment from "@modules/Department/Create";
 import CreateVacancies from "@modules/Vacancies/Create";
 import CreateEmployees from "@modules/Employees/Create";
+import Department from "@modules/Department/Department";
 import Layout from "@modules/common/components/Layout";
 import CreateShopping from "@modules/Shopping/Create";
 import CreateReports from "@modules/Reports/Create";
@@ -11,7 +12,6 @@ import Login from "@modules/auth/components/Login";
 import CreateEvents from "@modules/Events/Create";
 import Cooperation from "@modules/Cooperation";
 import CreateNews from "@modules/News/Create";
-import LearnItems from "@modules/LearnItems";
 import Vacancies from "@modules/Vacancies";
 import Employees from "@modules/Employees";
 import { Toaster } from "react-hot-toast";
@@ -75,9 +75,9 @@ export function App() {
                 <Route element={<Shopping />} index />
                 <Route element={<CreateShopping />} path="create/:id?" />
               </Route>
-              <Route path={APP_PATHS.learnItems}>
-                <Route element={<LearnItems />} index />
-                <Route element={<EachLearnItem />} path=":id" />
+              <Route path={APP_PATHS.department}>
+                <Route element={<Department />} index />
+                <Route element={<CreateDepartment />} path="create/:id?" />
               </Route>
               <Route element={<Navigate to={APP_PATHS.home} />} path="*" />
             </Route>

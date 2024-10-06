@@ -221,3 +221,8 @@
   color: red;
   margin-left: 17px;
 }
+
+.pdfDocumentContainer {
+  max-height: 100px;
+  overflow: hidden;
+}

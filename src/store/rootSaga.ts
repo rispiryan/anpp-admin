@@ -1,4 +1,5 @@
 import { watchCooperationSaga } from "@modules/Cooperation/store/sagas";
+import { watchDepartmentSaga } from "@modules/Department/store/sagas";
 import { watchVacanciesSaga } from "@modules/Vacancies/store/sagas";
 import { watchEmployeesSaga } from "@modules/Employees/store/sagas";
 import { watchShoppingSaga } from "@modules/Shopping/store/sagas";
@@ -18,5 +19,6 @@ export default function* rootSaga() {
     call(watchNewsSaga),
     call(watchEventsSaga),
     call(watchShoppingSaga),
+    call(watchDepartmentSaga),
   ]);
 }

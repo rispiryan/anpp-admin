@@ -1,6 +1,7 @@
 import employeesStateSlice from "@modules/Employees/store/employeesStateSlice";
 import shoppingStateSlice from "@modules/Shopping/store/shoppingStateSlice";
 import cooperationSlice from "@modules/Cooperation/store/cooperationSlice";
+import departmentSlice from "@modules/Department/store/departmentSlice";
 import eventsStateSlice from "@modules/Events/store/eventsStateSlice";
 import vacanciesSlice from "@modules/Vacancies/store/vacanciesSlice";
 import reportsSlice from "@modules/Reports/store/reportsSlice";
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   [shoppingStateSlice.name]: shoppingStateSlice.reducer,
   [cooperationSlice.name]: cooperationSlice.reducer,
   [eventsStateSlice.name]: eventsStateSlice.reducer,
+  [departmentSlice.name]: departmentSlice.reducer,
   [vacanciesSlice.name]: vacanciesSlice.reducer,
   [reportsSlice.name]: reportsSlice.reducer,
   [authSlice.name]: authSlice.reducer,

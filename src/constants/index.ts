@@ -2,6 +2,7 @@ export const API_BASE_URL = process.env.REACT_APP_API_URL;
 
 export const APP_PATHS = {
   createCooperation: "/Cooperation/create/",
+  createDepartment: "/department/create/",
   createVacancies: "/vacancies/create/",
   createEmployees: "/employees/create/",
   createShopping: "/shopping/create/",
@@ -10,6 +11,7 @@ export const APP_PATHS = {
   cooperation: "/Cooperation",
   createNews: "/news/create/",
   learnItems: "/learnItems",
+  department: "/department",
   employees: "/employees/",
   vacancies: "/vacancies",
   shopping: "/shopping",

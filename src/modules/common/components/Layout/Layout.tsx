@@ -66,8 +66,8 @@ const Layout = () => {
           <Link to={APP_PATHS.shopping}>
             <Button variant="outlined">Shopping</Button>
           </Link>
-          <Link to={APP_PATHS.learnItems}>
-            <Button variant="outlined">Learn Items</Button>
+          <Link to={APP_PATHS.department}>
+            <Button variant="outlined">Departments</Button>
           </Link>
         </div>
         <div className={styles.avatar}>
