@@ -52,7 +52,7 @@ function* createNewsSaga({ payload }: ReturnType<typeof actions.createNewsAction
   try {
     const { data } = yield call(newsService.createNews, payload.data);
     yield put(newsSlice.actions.getNewsListSuccessAction(data));
-    toast.success("News was successfully created");
+    toast.success("Education was successfully created");
     payload.navigate(APP_PATHS.news);
   } catch (error: any) {
     toast.error(error?.response?.data?.message);
@@ -67,7 +67,7 @@ function* updateNewsSaga({ payload }: ReturnType<typeof actions.updateNewsAction
   try {
     const { data } = yield call(newsService.updateNews, payload.data, payload.id);
     yield put(newsSlice.actions.getNewsListSuccessAction(data));
-    toast.success("News was successfully updated");
+    toast.success("Education was successfully updated");
     payload.navigate(APP_PATHS.news);
   } catch (error: any) {
     toast.error(error?.response?.data?.message);

@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 
-import { createNewsAction, updateNewsAction, getNewsAction } from "@modules/News/store/actions";
-import { newsLoadingSelector, newsSelector } from "@modules/News/store/selectors";
-import { newsSchema } from "@modules/News/Create/validations/validations";
+import { createEducationAction, updateEducationAction, getEducationAction } from "@modules/Education/store/actions";
+import { educationLoadingSelector, educationSelector } from "@modules/Education/store/selectors";
+import { educationSchema } from "@modules/Education/Create/validations/validations";
+import { type ICreateEducation } from "@modules/Education/store/types";
 import { Controller, useWatch, useForm } from "react-hook-form";
-import { type ICreateNews } from "@modules/News/store/types";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -15,11 +15,11 @@ import Input from "../../../components/shared/Input/Input";
 import { convertDataForUpdate } from "../../../utils";
 import Quill from "../../../components/shared/Quill";
 
-import styles from "./CreateNews.module.scss";
+import styles from "./CreateEducation.module.scss";
 
-const CreateNews = () => {
-  const loading = useSelector(newsLoadingSelector);
-  const news = useSelector(newsSelector);
+const CreateEducation = () => {
+  const loading = useSelector(educationLoadingSelector);
+  const education = useSelector(educationSelector);
   const navigate = useNavigate();
   const params = useParams();
 
@@ -47,17 +47,17 @@ const CreateNews = () => {
       en_title: "",
       ru_title: "",
     },
-    resolver: yupResolver(newsSchema),
+    resolver: yupResolver(educationSchema),
   });
   const imageCover = useWatch({ name: "image", control });
   const contentImages1 = useWatch({ name: "contentImages1", control });
   const contentImages2 = useWatch({ name: "contentImages2", control });
   const deletedFiles = useWatch({ name: "deletedFiles", control });
 
-  const onSubmit = (data: ICreateNews) => {
+  const onSubmit = (data: ICreateEducation) => {
     if (params.id) {
       dispatch(
-        updateNewsAction({
+        updateEducationAction({
           data: convertDataForUpdate(data, {
             ...dirtyFields,
             contentImages1: false,
@@ -70,18 +70,18 @@ const CreateNews = () => {
         }),
       );
     } else {
-      dispatch(createNewsAction({ navigate, data }));
+      dispatch(createEducationAction({ navigate, data }));
     }
   };
 
   useEffect(() => {
     if (params.id) {
-      dispatch(getNewsAction(params.id));
+      dispatch(getEducationAction(params.id));
     }
   }, [dispatch, params.id]);
 
   useEffect(() => {
-    if (news) {
+    if (education) {
       const {
         en_description,
         ru_description,
@@ -101,7 +101,7 @@ const CreateNews = () => {
         ar_title,
         ru_title,
         image,
-      } = news;
+      } = education;
       setValue("image", [image]);
       setValue("contentImages1", contentImages1?.length ? [...contentImages1.split(",")] : []);
       setValue("contentImages2", contentImages2?.length ? [...contentImages2.split(",")] : []);
@@ -121,7 +121,7 @@ const CreateNews = () => {
       setValue("ru_content3", ru_content3);
       setValue("ar_content3", ar_content3);
     }
-  }, [news, setValue]);
+  }, [education, setValue]);
 
   const deleteFile = (file: string) => {
     setValue("deletedFiles", deletedFiles?.length ? [...deletedFiles, file] : [file]);
@@ -129,7 +129,7 @@ const CreateNews = () => {
 
   return (
     <Box className={styles.create}>
-      <h2>{`${news?.id ? "Update" : "Create"} News`}</h2>
+      <h2>{`${education?.id ? "Update" : "Create"} Education`}</h2>
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
         <ImageUploader
           setImageUrls={(value) => setValue("image", value)}
@@ -258,11 +258,11 @@ const CreateNews = () => {
         </Box>
 
         <Button className={styles.button} variant="contained" disabled={loading} type="submit">
-          {news?.id ? "Update" : "Create"}
+          {education?.id ? "Update" : "Create"}
         </Button>
       </form>
     </Box>
   );
 };
 
-export default CreateNews;
+export default CreateEducation;

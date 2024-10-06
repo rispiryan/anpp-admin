@@ -69,6 +69,9 @@ const Layout = () => {
           <Link to={APP_PATHS.department}>
             <Button variant="outlined">Departments</Button>
           </Link>
+          <Link to={APP_PATHS.education}>
+            <Button variant="outlined">Education</Button>
+          </Link>
         </div>
         <div className={styles.avatar}>
           <Typography sx={{ p: 2 }}>{user?.fullName || ""}</Typography>

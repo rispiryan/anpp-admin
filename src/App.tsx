@@ -5,6 +5,7 @@ import CreateDepartment from "@modules/Department/Create";
 import CreateVacancies from "@modules/Vacancies/Create";
 import CreateEmployees from "@modules/Employees/Create";
 import Department from "@modules/Department/Department";
+import CreateEducation from "@modules/Education/Create";
 import Layout from "@modules/common/components/Layout";
 import CreateShopping from "@modules/Shopping/Create";
 import CreateReports from "@modules/Reports/Create";
@@ -14,6 +15,7 @@ import Cooperation from "@modules/Cooperation";
 import CreateNews from "@modules/News/Create";
 import Vacancies from "@modules/Vacancies";
 import Employees from "@modules/Employees";
+import Education from "@modules/Education";
 import { Toaster } from "react-hot-toast";
 import Shopping from "@modules/Shopping";
 import { Provider } from "react-redux";
@@ -78,6 +80,10 @@ export function App() {
               <Route path={APP_PATHS.department}>
                 <Route element={<Department />} index />
                 <Route element={<CreateDepartment />} path="create/:id?" />
+              </Route>
+              <Route path={APP_PATHS.education}>
+                <Route element={<Education />} index />
+                <Route element={<CreateEducation />} path="create/:id?" />
               </Route>
               <Route element={<Navigate to={APP_PATHS.home} />} path="*" />
             </Route>
