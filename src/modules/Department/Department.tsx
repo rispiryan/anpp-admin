@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { departmentLoadingSelector, departmentListSelector } from "@modules/Department/store/selectors";
 import { getDepartmentListAction, deleteDepartmentAction } from "@modules/Department/store/actions";
 import { type IDeleteDepartment } from "@modules/Department/store/types";
+import { departmentTypes } from "@modules/Department/constants";
 import Loader from "@modules/common/components/Loader";
 import { useDispatch, useSelector } from "react-redux";
 import { type GridColDef } from "@mui/x-data-grid";
@@ -50,7 +51,7 @@ const Department = () => {
     },
     {
       renderCell: ({ row }) => <>{row.slug}</>,
-      headerName: "Slug",
+      headerName: "Type",
       field: "slug",
       width: 180,
     },
@@ -100,6 +101,7 @@ const Department = () => {
       <Loader isLoading={loading} />
       <h1>Department</h1>
       <Button
+        disabled={departmentList.length === departmentTypes.length}
         onClick={() => navigate(APP_PATHS.createDepartment)}
         className={styles.create}
         variant="contained"

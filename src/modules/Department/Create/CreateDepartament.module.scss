@@ -16,6 +16,17 @@
     grid-template-columns: 1fr 1fr 1fr;
     gap: 24px;
   }
+
+
+  .selectWrap{
+    width: 350px;
+
+    .select{
+      width: 250px;
+      overflow: hidden;
+    }
+  }
+
 }
 
 

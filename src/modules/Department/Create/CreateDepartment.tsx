@@ -1,14 +1,24 @@
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 
-import { createDepartmentAction, updateDepartmentAction, getDepartmentAction } from "@modules/Department/store/actions";
-import { departmentLoadingSelector, departmentSelector } from "@modules/Department/store/selectors";
+import {
+  getDepartmentListAction,
+  createDepartmentAction,
+  updateDepartmentAction,
+  getDepartmentAction,
+} from "@modules/Department/store/actions";
+import {
+  departmentLoadingSelector,
+  departmentListSelector,
+  departmentSelector,
+} from "@modules/Department/store/selectors";
 import { departmentSchema } from "@modules/Department/Create/validations/validations";
+import { FormControl, MenuItem, Button, Select, Box } from "@mui/material";
 import { type ICreateDepartment } from "@modules/Department/store/types";
 import { Controller, useWatch, useForm } from "react-hook-form";
+import { departmentTypes } from "@modules/Department/constants";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Button, Box } from "@mui/material";
 
 import ImageUploader from "../../../components/shared/ImageUploader";
 import Input from "../../../components/shared/Input/Input";
@@ -20,6 +30,7 @@ import styles from "./CreateDepartament.module.scss";
 const CreateDepartment = () => {
   const loading = useSelector(departmentLoadingSelector);
   const department = useSelector(departmentSelector);
+  const departmentList = useSelector(departmentListSelector);
   const navigate = useNavigate();
   const params = useParams();
 
@@ -73,8 +84,6 @@ const CreateDepartment = () => {
   };
 
   useEffect(() => {
-    console.log(params.id, 32);
-
     if (params.id) {
       dispatch(getDepartmentAction(params.id));
     }
@@ -123,23 +132,64 @@ const CreateDepartment = () => {
     setValue("deletedFiles", deletedFiles?.length ? [...deletedFiles, file] : [file]);
   };
 
+  useEffect(() => {
+    dispatch(getDepartmentListAction());
+  }, [dispatch]);
+
+  const typesOption = useMemo(() => {
+    const option = departmentTypes.filter(
+      (type) => !departmentList.some((department) => department.slug === type.value),
+    );
+
+    if (option.length) {
+      setValue("slug", option[0].value);
+    }
+
+    return option;
+  }, [departmentList]);
+
   return (
     <Box className={styles.create}>
       <h2>{`${department?.id ? "Update" : "Create"} Department`}</h2>
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
         <Controller
           render={({ field }) => (
-            <Input
-              helperText={errors?.slug?.message}
-              error={!!errors?.slug?.message}
-              className={styles.input}
-              label="Slug"
-              {...field}
-            />
+            <Box sx={{ minWidth: 120 }}>
+              <FormControl fullWidth>
+                <div className={styles.selectWrap}>
+                  <p>Select Department Type</p>
+                  <Select
+                    {...field}
+                    labelId="demo-simple-select-label"
+                    className={styles.select}
+                    id="demo-simple-select"
+                  >
+                    {typesOption.map((type) => (
+                      <MenuItem className={styles.item} value={type.value} key={type.value}>
+                        {type.label}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </div>
+              </FormControl>
+            </Box>
           )}
           control={control}
           name="slug"
         />
+        {/*<Controller*/}
+        {/*  render={({ field }) => (*/}
+        {/*    <Input*/}
+        {/*      helperText={errors?.slug?.message}*/}
+        {/*      error={!!errors?.slug?.message}*/}
+        {/*      className={styles.input}*/}
+        {/*      label="Slug"*/}
+        {/*      {...field}*/}
+        {/*    />*/}
+        {/*  )}*/}
+        {/*  control={control}*/}
+        {/*  name="slug"*/}
+        {/*/>*/}
         <Box className={styles.titles}>
           <Controller
             render={({ field }) => (
