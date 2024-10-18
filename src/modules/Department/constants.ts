@@ -1,5 +1,6 @@
 export const departmentTypes = [
   { value: "production", label: "Production" },
+  { value: "safety", label: "Safety" },
   { value: "history", label: "History" },
   { value: "reactor_factory", label: "Reactor Factory" },
   { value: "turbine_factory", label: "Turbine Factory" },

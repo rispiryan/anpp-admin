@@ -52,7 +52,7 @@ function* createNewsSaga({ payload }: ReturnType<typeof actions.createNewsAction
   try {
     const { data } = yield call(newsService.createNews, payload.data);
     yield put(newsSlice.actions.getNewsListSuccessAction(data));
-    toast.success("Education was successfully created");
+    toast.success("News was successfully created");
     payload.navigate(APP_PATHS.news);
   } catch (error: any) {
     toast.error(error?.response?.data?.message);
