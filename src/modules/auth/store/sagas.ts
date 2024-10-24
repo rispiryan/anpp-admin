@@ -38,7 +38,21 @@ function* getProfileSaga() {
   }
 }
 
+function* changePasswordSaga({ payload }: ReturnType<typeof actions.changePasswordAction>) {
+  yield put(authSlice.actions.setLoading(true));
+
+  try {
+    yield call(authService.changePassword, payload);
+    toast.success("Password was successfully changed");
+  } catch (error: any) {
+    toast.error(error?.response?.data?.message);
+  } finally {
+    yield put(authSlice.actions.setLoading(false));
+  }
+}
+
 export function* watchAuthSaga(): Generator<ForkEffect> {
   yield takeLatest(actions.loginAction.type, loginSaga);
+  yield takeLatest(actions.changePasswordAction.type, changePasswordSaga);
   yield takeLatest(actions.getProfileAction.type, getProfileSaga);
 }

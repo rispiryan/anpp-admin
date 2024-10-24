@@ -3,6 +3,7 @@ import { type ILogin } from "@modules/auth/store/types";
 import request from "../../../../services/request";
 
 const END_POINTS = {
+  changePassword: "users/change-password",
   profile: "users/profile",
   login: "auth/login",
 };
@@ -18,5 +19,13 @@ export function login(requestData: ILogin) {
 export function getProfile() {
   return request({
     url: `${END_POINTS.profile}`,
+  });
+}
+
+export function changePassword(password: string) {
+  return request({
+    url: `${END_POINTS.changePassword}`,
+    data: { password },
+    method: "POST",
   });
 }

@@ -8,6 +8,7 @@ import Department from "@modules/Department/Department";
 import CreateEducation from "@modules/Education/Create";
 import Layout from "@modules/common/components/Layout";
 import CreateShopping from "@modules/Shopping/Create";
+import ChangePassword from "@modules/ChangePassword";
 import CreateReports from "@modules/Reports/Create";
 import Login from "@modules/auth/components/Login";
 import CreateEvents from "@modules/Events/Create";
@@ -56,6 +57,9 @@ export function App() {
               <Route path={APP_PATHS.cooperation}>
                 <Route element={<Cooperation />} index />
                 <Route element={<CreateCooperation />} path="create/:id?" />
+              </Route>
+              <Route path={APP_PATHS.changePassword}>
+                <Route element={<ChangePassword />} index />
               </Route>
               <Route path={APP_PATHS.vacancies}>
                 <Route element={<Vacancies />} index />

@@ -50,6 +50,12 @@
   z-index: 21;
 }
 
+.item {
+  &:hover{
+    background: gainsboro;
+  }
+}
+
 @include media("<tabletMaxSize") {
   .test {
     top: 70px;

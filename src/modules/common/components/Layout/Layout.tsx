@@ -92,8 +92,15 @@ const Layout = () => {
             open={open}
             id={id}
           >
-            <Typography sx={{ cursor: "pointer", p: 2 }} onClick={logout}>
+            <Typography sx={{ cursor: "pointer", p: 2 }} className={styles.item} onClick={logout}>
               Logout
+            </Typography>
+            <Typography
+              onClick={() => navigate(APP_PATHS.changePassword)}
+              sx={{ cursor: "pointer", p: 2 }}
+              className={styles.item}
+            >
+              Change password
             </Typography>
           </Popover>
         </div>
