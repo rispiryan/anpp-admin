@@ -2,6 +2,7 @@ import { authLoadingSelector } from "@modules/auth/store/selectors";
 import { changePasswordAction } from "@modules/auth/store/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { Controller, useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
 
 import Input from "../../components/shared/Input/Input";
@@ -11,6 +12,7 @@ import styles from "./ChangePassword.module.scss";
 const ChangePassword = () => {
   const dispatch = useDispatch();
   const loading = useSelector(authLoadingSelector);
+  const navigate = useNavigate();
   const {
     formState: { errors },
     handleSubmit,
@@ -23,7 +25,7 @@ const ChangePassword = () => {
   });
 
   const onSubmit = ({ password }: { password: string }) => {
-    dispatch(changePasswordAction(password));
+    dispatch(changePasswordAction({ password, navigate }));
     reset();
   };
 

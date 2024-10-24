@@ -2,6 +2,7 @@ import { type ForkEffect, takeLatest, put } from "redux-saga/effects";
 import { call } from "redux-saga/effects";
 import toast from "react-hot-toast";
 
+import { APP_PATHS } from "../../../constants";
 import * as authService from "./authService";
 import * as actions from "./actions";
 import authSlice from "./authSlice";
@@ -42,8 +43,9 @@ function* changePasswordSaga({ payload }: ReturnType<typeof actions.changePasswo
   yield put(authSlice.actions.setLoading(true));
 
   try {
-    yield call(authService.changePassword, payload);
+    yield call(authService.changePassword, payload.password);
     toast.success("Password was successfully changed");
+    payload.navigate(APP_PATHS.login);
   } catch (error: any) {
     toast.error(error?.response?.data?.message);
   } finally {
@@ -51,8 +53,17 @@ function* changePasswordSaga({ payload }: ReturnType<typeof actions.changePasswo
   }
 }
 
+function* logAutSaga({ payload }: ReturnType<typeof actions.logOutAction>) {
+  try {
+    yield call(authService.logAut, payload);
+  } catch (error: any) {
+    toast.error(error?.response?.data?.message);
+  }
+}
+
 export function* watchAuthSaga(): Generator<ForkEffect> {
   yield takeLatest(actions.loginAction.type, loginSaga);
   yield takeLatest(actions.changePasswordAction.type, changePasswordSaga);
   yield takeLatest(actions.getProfileAction.type, getProfileSaga);
+  yield takeLatest(actions.logOutAction.type, logAutSaga);
 }

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { getProfileAction } from "@modules/auth/store/actions";
+import { getProfileAction, logOutAction } from "@modules/auth/store/actions";
 import { userSelector } from "@modules/auth/store/selectors";
 import { useNavigate, Outlet, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -30,6 +30,10 @@ const Layout = () => {
   };
 
   const logout = () => {
+    if (localStorage.getItem("authToken")) {
+      dispatch(logOutAction(localStorage.getItem("authToken") || ""));
+    }
+
     localStorage.setItem("authToken", "");
     navigate(APP_PATHS.login);
   };

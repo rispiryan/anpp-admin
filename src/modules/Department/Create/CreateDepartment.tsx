@@ -18,6 +18,7 @@ import { Controller, useWatch, useForm } from "react-hook-form";
 import { departmentTypes } from "@modules/Department/constants";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import Loader from "@modules/common/components/Loader";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import ImageUploader from "../../../components/shared/ImageUploader";
@@ -150,6 +151,7 @@ const CreateDepartment = () => {
 
   return (
     <Box className={styles.create}>
+      <Loader isLoading={loading} />
       <h2>{`${department?.id ? "Update" : "Create"} Department`}</h2>
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
         <Controller

@@ -5,6 +5,7 @@ import request from "../../../../services/request";
 const END_POINTS = {
   changePassword: "users/change-password",
   profile: "users/profile",
+  logout: "auth/logout",
   login: "auth/login",
 };
 
@@ -26,6 +27,14 @@ export function changePassword(password: string) {
   return request({
     url: `${END_POINTS.changePassword}`,
     data: { password },
+    method: "POST",
+  });
+}
+
+export function logAut(token: string) {
+  return request({
+    url: `${END_POINTS.logout}`,
+    data: { token },
     method: "POST",
   });
 }

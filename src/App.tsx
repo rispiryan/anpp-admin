@@ -46,7 +46,7 @@ export function App() {
         />
         <BrowserRouter>
           <Routes>
-            <Route element={<Navigate to={APP_PATHS.home} />} path="/" />
+            <Route element={<Navigate to={APP_PATHS.news} />} path="/" />
             <Route path={APP_PATHS.login} element={<Login />} />
             <Route element={<Layout />}>
               <Route element={<div>Home</div>} path={APP_PATHS.home} />

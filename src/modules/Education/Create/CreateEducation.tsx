@@ -7,6 +7,7 @@ import { type ICreateEducation } from "@modules/Education/store/types";
 import { Controller, useWatch, useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import Loader from "@modules/common/components/Loader";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Button, Box } from "@mui/material";
 
@@ -129,6 +130,7 @@ const CreateEducation = () => {
 
   return (
     <Box className={styles.create}>
+      <Loader isLoading={loading} />
       <h2>{`${education?.id ? "Update" : "Create"} Education`}</h2>
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
         <ImageUploader

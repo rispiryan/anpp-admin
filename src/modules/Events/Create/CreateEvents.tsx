@@ -7,6 +7,7 @@ import { type ICreateEvents } from "@modules/Events/store/types";
 import { Controller, useWatch, useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import Loader from "@modules/common/components/Loader";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Button, Box } from "@mui/material";
 
@@ -78,6 +79,7 @@ const CreateEvents = () => {
 
   return (
     <Box className={styles.createEvents}>
+      <Loader isLoading={loading} />
       <h2>{`${events?.id ? "Update" : "Create"} Events`}</h2>
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
         <ImageUploader

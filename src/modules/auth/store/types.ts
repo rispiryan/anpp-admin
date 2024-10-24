@@ -1,3 +1,5 @@
+import { type INavigate } from "@modules/Vacancies/store/types";
+
 import { type RoleType } from "../../../constants/userRoles";
 
 export type IAuth = {
@@ -21,4 +23,8 @@ export type IRoles = {
 export type ILogin = {
   password: string;
   email: string;
+};
+export type IChangePassword = {
+  navigate: INavigate;
+  password: string;
 };

@@ -6,6 +6,7 @@ import { vacanciesSchema } from "@modules/Vacancies/Create/validations/validatio
 import { type ICreateVacancies } from "@modules/Vacancies/store/types";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import Loader from "@modules/common/components/Loader";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Button, Box } from "@mui/material";
@@ -69,6 +70,7 @@ const CreateVacancies = () => {
 
   return (
     <Box className={styles.create}>
+      <Loader isLoading={loading} />
       <h2>{`${vacancies?.id ? "Update" : "Create"} Vacancies`}</h2>
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
         <Box className={styles.titles}>
